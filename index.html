@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIH Project · Nothing Design Identity Screening Terminal</title>
+<title>SIH Project · Minimalist Document Screening</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -14,76 +14,72 @@
 <div id="appContainer">
 
   <!-- =========================================================================
-       VIEW 1: LANDING OVERVIEW (NOTHING STYLE)
+       VIEW 1: LANDING OVERVIEW (ULTRA MINIMALIST NOTHING STYLE)
   ========================================================================= -->
   <div id="landingView" class="view-screen">
     
-    <!-- NAVIGATION BAR -->
+    <!-- MINIMAL NAVBAR -->
     <header class="navbar">
       <div class="nav-brand">
         <span class="signal-dot">●</span>
-        <span class="brand-title">SIH PROJECT</span>
-        <span class="brand-sub">[PS 26188]</span>
+        <span class="brand-title">SIH // 26188</span>
       </div>
       <nav class="nav-links">
         <a href="#overview">[OVERVIEW]</a>
         <a href="#modules">[MODULES]</a>
-        <a href="#architecture">[PIPELINE]</a>
-        <a href="#standards">[SPECIFICATIONS]</a>
+        <a href="#pipeline">[PIPELINE]</a>
       </nav>
       <div class="nav-actions">
-        <span class="sys-status">[STATUS: OPERATIONAL]</span>
-        <button class="btn-tech" id="launchConsoleFromNav">LAUNCH TERMINAL ➔</button>
+        <span class="sys-status">[AIR-GAPPED]</span>
+        <button class="btn-minimal" id="launchConsoleFromNav">LAUNCH TERMINAL ➔</button>
       </div>
     </header>
 
     <!-- HERO SECTION -->
     <section class="hero-section" id="overview">
       <div class="hero-content">
-        <div class="meta-tag">[BORDER SECURITY / SASHASTRA SEEMA BAL]</div>
+        <div class="meta-tag">PS 26188 // MINISTRY OF HOME AFFAIRS — SSB</div>
         <h1 class="hero-headline">SIH // 26188</h1>
-        <h2 class="hero-subheadline">AUTONOMOUS DOCUMENT SCREENING &amp; MULTI-MODAL FRAUD FORENSICS</h2>
         <p class="hero-subtext">
-          Zero-cloud, air-gapped identity verification. Integrates ICAO 9303 OCR parsing, modulo-10 algorithmic checksum validation, JPEG Error Level Analysis (ELA) tampering detection, and 128-dimensional face embeddings.
+          Autonomous document screening and multi-modal fraud forensics. 100% on-device local execution for high-volume border checkpoints.
         </p>
         <div class="hero-ctas">
-          <button class="btn-primary-rect" id="launchConsoleBtn">
-            <span>LAUNCH OPERATOR TERMINAL</span>
+          <button class="btn-primary-minimal" id="launchConsoleBtn">
+            <span>LAUNCH SCREENING TERMINAL</span>
             <span class="arrow">➔</span>
           </button>
-          <a href="#modules" class="btn-secondary-rect">[EXPLORE MODULES]</a>
         </div>
 
-        <!-- TELEMETRY INSTRUMENT STRIP -->
+        <!-- MINIMAL TELEMETRY STRIP -->
         <div class="telemetry-strip">
           <div class="t-block">
             <span class="t-val">&lt;3.0S</span>
-            <span class="t-lbl">SCREENING LATENCY</span>
+            <span class="t-lbl">LATENCY</span>
           </div>
           <div class="t-block">
             <span class="t-val">100%</span>
-            <span class="t-lbl">ON-DEVICE PRIVACY</span>
+            <span class="t-lbl">LOCAL PRIVACY</span>
           </div>
           <div class="t-block">
             <span class="t-val">04-TIER</span>
-            <span class="t-lbl">DEFENSE PIPELINE</span>
+            <span class="t-lbl">DEFENSE STACK</span>
           </div>
           <div class="t-block">
             <span class="t-val">ICAO 9303</span>
-            <span class="t-lbl">GLOBAL COMPLIANCE</span>
+            <span class="t-lbl">COMPLIANCE</span>
           </div>
         </div>
       </div>
 
-      <!-- HERO PREVIEW WIDGET -->
+      <!-- MINIMAL WIDGET -->
       <div class="hero-widget">
         <div class="widget-header">
-          <span class="widget-title">INSTRUMENT_OUTPUT // CHECKPOINT_SSB-01</span>
-          <span class="signal-tag">[LIVE_TELEMETRY]</span>
+          <span class="widget-title">TELEMETRY // CHECKPOINT_SSB-01</span>
+          <span class="signal-tag">[LIVE]</span>
         </div>
         <div class="widget-body">
           <div class="mono-box">
-            <div class="mono-line-header">[MRZ DATA STREAM DETECTED]</div>
+            <div class="mono-line-header">[MRZ STREAM]</div>
             <code class="mrz-text">P&lt;INDAPARNA&lt;&lt;SATYAM&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>
             <code class="mrz-text">Z982104928IND9204128M3009121820419283401&lt;82</code>
           </div>
@@ -91,109 +87,86 @@
           <div class="widget-readout">
             <div class="r-row">
               <span>ICAO CHECKSUM</span>
-              <span class="val-success">MATCH [MOD-10 PASS]</span>
+              <span class="val-success">MOD-10 PASS</span>
             </div>
             <div class="r-row">
-              <span>ELA COMPRESSION VARIANCE</span>
+              <span>ELA VARIANCE</span>
               <span class="val-success">CLEAN [STD 14.2]</span>
             </div>
             <div class="r-row">
-              <span>BIOMETRIC EMBEDDING</span>
-              <span class="val-success">VERIFIED [DIST 0.24]</span>
+              <span>FACE MATCH</span>
+              <span class="val-success">VERIFIED [0.24]</span>
             </div>
             <div class="r-row highlight">
-              <span>COMPOSITE RISK SCORE</span>
+              <span>COMPOSITE RISK</span>
               <span class="val-success">12 / 100 [LOW RISK]</span>
             </div>
           </div>
         </div>
-        <div class="widget-footer">
-          <span>LOG_HASH: 9F8A2B7C014D</span>
-          <span>NO_TAMPERING_SIGNATURES</span>
-        </div>
       </div>
     </section>
 
-    <!-- CORE MODULES -->
+    <!-- MINIMAL MODULES GRID -->
     <section class="section-container" id="modules">
       <div class="section-head">
-        <span class="section-tag">[SYSTEM ARCHITECTURE]</span>
-        <h2 class="section-title">THE 04 SCREENING MODULES</h2>
+        <span class="section-tag">[SYSTEM MODULES]</span>
+        <h2 class="section-title">THE 04 CORE LAYERS</h2>
       </div>
 
-      <div class="modules-grid">
-        <div class="mod-card">
-          <span class="mod-num">MOD // 01</span>
+      <div class="minimal-grid">
+        <div class="min-card">
+          <span class="min-num">01</span>
           <h3>OCR &amp; MRZ PARSING</h3>
-          <p>Scans Machine Readable Zones per ICAO 9303 standards. Auto-corrects OCR digit confusion ($O \rightarrow 0, I \rightarrow 1, Z \rightarrow 2$).</p>
-          <ul class="mod-list">
-            <li>[PASSPORTS, VISAS, NATIONAL IDS]</li>
-            <li>[SURNAME, GIVEN NAMES, DOB, EXPIRY]</li>
-          </ul>
+          <p>Scans Machine Readable Zones per ICAO 9303. Auto-corrects OCR digit confusion ($O \rightarrow 0, I \rightarrow 1, Z \rightarrow 2$).</p>
         </div>
 
-        <div class="mod-card">
-          <span class="mod-num">MOD // 02</span>
+        <div class="min-card">
+          <span class="min-num">02</span>
           <h3>CHECKSUM VALIDATION</h3>
-          <p>Applies strict modulo-10 weighted ($7, 3, 1$) mathematical verification over raw MRZ strings to detect text alteration.</p>
-          <ul class="mod-list">
-            <li>[PASSPORT NUMBER CHECK DIGITS]</li>
-            <li>[WATCHLIST &amp; SLTD DATABASE LOOKUP]</li>
-          </ul>
+          <p>Modulo-10 weighted ($7, 3, 1$) mathematical check digits over raw MRZ fields + Interpol SLTD watchlist verification.</p>
         </div>
 
-        <div class="mod-card">
-          <span class="mod-num">MOD // 03</span>
-          <h3>ELA TAMPERING SCAN</h3>
-          <p>Error Level Analysis re-compresses document canvases to expose JPEG quantization variance and editing software EXIF signatures.</p>
-          <ul class="mod-list">
-            <li>[PIXEL VARIANCE HEATMAP]</li>
-            <li>[PHOTOSHOP / CANVA DETECTION]</li>
-          </ul>
+        <div class="min-card">
+          <span class="min-num">03</span>
+          <h3>ELA FORENSICS SCAN</h3>
+          <p>Error Level Analysis re-compresses document canvases to expose JPEG quantization variance and editing metadata.</p>
         </div>
 
-        <div class="mod-card">
-          <span class="mod-num">MOD // 04</span>
+        <div class="min-card">
+          <span class="min-num">04</span>
           <h3>BIOMETRIC FACE MATCH</h3>
           <p>Extracts 128-dimensional deep face neural embeddings from document portrait and live WebRTC camera capture.</p>
-          <ul class="mod-list">
-            <li>[RESNET-34 128-D VECTOR EMBEDDINGS]</li>
-            <li>[WEBRTC LIVE WEBCAM SCANNER]</li>
-          </ul>
         </div>
       </div>
     </section>
 
     <!-- PIPELINE -->
-    <section class="section-container" id="architecture">
+    <section class="section-container" id="pipeline">
       <div class="section-head">
-        <span class="section-tag">[DATA PIPELINE]</span>
-        <h2 class="section-title">MULTI-MODAL RISK FUSION</h2>
+        <span class="section-tag">[EXECUTION FLOW]</span>
+        <h2 class="section-title">SCREENING PIPELINE</h2>
       </div>
 
-      <div class="pipeline-grid">
-        <div class="pipe-box">
-          <span class="pipe-num">01</span>
-          <h4>INPUT CAPTURE</h4>
-          <p>Image scan via drag-and-drop or local file stream.</p>
+      <div class="pipeline-row">
+        <div class="pipe-item">
+          <span class="p-num">01</span>
+          <h4>INPUT</h4>
+          <p>Document scan stream.</p>
         </div>
-        <div class="pipe-divider"></div>
-        <div class="pipe-box">
-          <span class="pipe-num">02</span>
-          <h4>MULTI-MODULE SCAN</h4>
-          <p>Parallel OCR, modulo-10 math, ELA, and face distance.</p>
+        <div class="pipe-item">
+          <span class="p-num">02</span>
+          <h4>ANALYSIS</h4>
+          <p>OCR, math, ELA, face match.</p>
         </div>
-        <div class="pipe-divider"></div>
-        <div class="pipe-box">
-          <span class="pipe-num">03</span>
-          <h4>RISK FUSION</h4>
-          <p>Weighted synthesis yielding 0–100 composite risk score.</p>
+        <div class="pipe-item">
+          <span class="p-num">03</span>
+          <h4>FUSION</h4>
+          <p>Weighted 0–100 risk score.</p>
         </div>
-        <div class="pipe-divider"></div>
-        <div class="pipe-box">
-          <span class="pipe-num">04</span>
-          <h4>AUDIT RECORD</h4>
-          <p>Generates JSON audit trail for security logs.</p>
+        <div class="pipe-item">
+          <span class="p-num">04</span>
+          <h4>AUDIT</h4>
+          <p>JSON case record.</p>
         </div>
       </div>
     </section>
@@ -201,8 +174,8 @@
     <!-- FOOTER -->
     <footer class="landing-footer">
       <div class="footer-inner">
-        <span>SIH PROJECT // SASHASTRA SEEMA BAL (SSB) PROBLEM STATEMENT 26188</span>
-        <span>100% AIR-GAPPED ON-DEVICE PROCESSING</span>
+        <span>SIH // PS 26188 // SSB</span>
+        <span>100% LOCAL EXECUTION</span>
       </div>
     </footer>
 
@@ -210,7 +183,7 @@
 
 
   <!-- =========================================================================
-       VIEW 2: OPERATOR SCREENING TERMINAL (NOTHING STYLE)
+       VIEW 2: OPERATOR SCREENING TERMINAL (MINIMALIST CONSOLE)
   ========================================================================= -->
   <div id="consoleView" class="view-screen hidden">
 
@@ -219,14 +192,14 @@
       <!-- TOP BAR -->
       <header class="topbar">
         <div class="brand">
-          <button class="btn-secondary-rect" id="backToLandingBtn">[← OVERVIEW]</button>
+          <button class="btn-minimal" id="backToLandingBtn">← OVERVIEW</button>
           <span class="signal-dot">●</span>
-          <span class="brand-title">SIH PROJECT TERMINAL</span>
+          <span class="brand-title">SIH // TERMINAL</span>
         </div>
         <div class="topbar-meta">
           <div class="meta-item"><span class="meta-label">CHECKPOINT</span><span class="meta-value" id="checkpointId">SSB-DEMO-01</span></div>
           <div class="meta-item"><span class="meta-label">SESSION</span><span class="meta-value" id="sessionId">—</span></div>
-          <button class="btn-secondary-rect" id="newCaseBtn">[NEW CASE]</button>
+          <button class="btn-minimal" id="newCaseBtn">NEW CASE</button>
         </div>
       </header>
 
@@ -238,7 +211,6 @@
             <span class="step-index">01</span>
             <div class="step-copy">
               <span class="step-title">CAPTURE &amp; OCR</span>
-              <span class="step-desc">EXTRACT FIELDS</span>
             </div>
             <span class="step-status" data-status="1"></span>
           </div>
@@ -246,7 +218,6 @@
             <span class="step-index">02</span>
             <div class="step-copy">
               <span class="step-title">VALIDATION</span>
-              <span class="step-desc">RULE CHECKS</span>
             </div>
             <span class="step-status" data-status="2"></span>
           </div>
@@ -254,7 +225,6 @@
             <span class="step-index">03</span>
             <div class="step-copy">
               <span class="step-title">TAMPERING SCAN</span>
-              <span class="step-desc">ELA FORENSICS</span>
             </div>
             <span class="step-status" data-status="3"></span>
           </div>
@@ -262,7 +232,6 @@
             <span class="step-index">04</span>
             <div class="step-copy">
               <span class="step-title">FACE VERIFICATION</span>
-              <span class="step-desc">BIOMETRIC MATCH</span>
             </div>
             <span class="step-status" data-status="4"></span>
           </div>
@@ -270,7 +239,6 @@
             <span class="step-index">05</span>
             <div class="step-copy">
               <span class="step-title">RISK REPORT</span>
-              <span class="step-desc">FINAL VERDICT</span>
             </div>
             <span class="step-status" data-status="5"></span>
           </div>
@@ -279,23 +247,23 @@
             <span class="risk-dock-label">COMPOSITE RISK</span>
             <div class="risk-gauge" id="riskGaugeMini">
               <svg viewBox="0 0 120 68" width="100%">
-                <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#222222" stroke-width="10" stroke-linecap="round"/>
-                <path id="riskArc" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#4A9E5C" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 300"/>
+                <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#1A1A1A" stroke-width="8" stroke-linecap="round"/>
+                <path id="riskArc" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#4A9E5C" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 300"/>
               </svg>
               <span class="risk-gauge-value" id="riskGaugeValue">—</span>
             </div>
-            <span class="risk-dock-tag" id="riskDockTag">NO CASE LOADED</span>
+            <span class="risk-dock-tag" id="riskDockTag">NO CASE</span>
           </div>
         </nav>
 
-        <!-- MAIN TERMINAL WORKSPACE -->
+        <!-- MAIN WORKSPACE -->
         <main class="workspace">
 
           <!-- STEP 1: UPLOAD + OCR -->
           <section class="panel" id="panel-1">
             <div class="panel-head">
               <h2>CAPTURE &amp; OCR EXTRACTION</h2>
-              <span class="panel-hint">MODULE // 01</span>
+              <span class="panel-hint">MOD // 01</span>
             </div>
 
             <div class="upload-row">
@@ -304,7 +272,7 @@
                 <div class="upload-inner">
                   <span class="upload-icon">⎘</span>
                   <p><strong>DROP OR SELECT DOCUMENT IMAGE</strong></p>
-                  <p class="muted">Passport · Visa · National ID · Driving Licence · Permit</p>
+                  <p class="muted">Passport · Visa · National ID · Licence · Permit</p>
                 </div>
                 <img id="docPreview" class="preview-img" hidden />
               </div>
@@ -318,7 +286,7 @@
                   <option value="driving_license">Driving Licence</option>
                   <option value="permit">Permit Document</option>
                 </select>
-                <button class="btn-primary-rect" id="runOcrBtn" disabled>RUN OCR EXTRACTION</button>
+                <button class="btn-primary-minimal" id="runOcrBtn" disabled>RUN OCR EXTRACTION</button>
                 <div class="ocr-progress" id="ocrProgress" hidden>
                   <div class="ocr-progress-bar" id="ocrProgressBar"></div>
                   <span id="ocrProgressLabel">INITIALISING OCR ENGINE…</span>
@@ -340,7 +308,7 @@
             </div>
 
             <div class="panel-footer">
-              <button class="btn-primary-rect" id="toStep2" disabled>CONTINUE TO VALIDATION →</button>
+              <button class="btn-primary-minimal" id="toStep2" disabled>CONTINUE TO VALIDATION →</button>
             </div>
           </section>
 
@@ -348,13 +316,13 @@
           <section class="panel hidden" id="panel-2">
             <div class="panel-head">
               <h2>DOCUMENT RULE VALIDATION</h2>
-              <span class="panel-hint">MODULE // 02</span>
+              <span class="panel-hint">MOD // 02</span>
             </div>
-            <p class="muted">Verifies ICAO 9303 modulo-10 weighted checksums, date logic, field completeness, and watchlist database records.</p>
+            <p class="muted">Verifies ICAO 9303 modulo-10 check digits, dates, field completeness, and Interpol SLTD database.</p>
             <div class="rule-list" id="ruleList"></div>
             <div class="panel-footer">
-              <button class="btn-secondary-rect" data-back="1">← BACK</button>
-              <button class="btn-primary-rect" id="toStep3">CONTINUE TO TAMPERING SCAN →</button>
+              <button class="btn-minimal" data-back="1">← BACK</button>
+              <button class="btn-primary-minimal" id="toStep3">CONTINUE TO TAMPERING SCAN →</button>
             </div>
           </section>
 
@@ -362,9 +330,9 @@
           <section class="panel hidden" id="panel-3">
             <div class="panel-head">
               <h2>TAMPERING &amp; FORENSICS SCAN</h2>
-              <span class="panel-hint">MODULE // 03</span>
+              <span class="panel-hint">MOD // 03</span>
             </div>
-            <p class="muted">Error Level Analysis (ELA) re-compresses the image canvas to highlight quantization variance. EXIF byte headers are scanned for editing signatures.</p>
+            <p class="muted">Error Level Analysis (ELA) re-compresses document canvases to expose JPEG quantization variance and EXIF signatures.</p>
 
             <div class="tamper-grid">
               <div class="tamper-col">
@@ -390,8 +358,8 @@
             </div>
 
             <div class="panel-footer">
-              <button class="btn-secondary-rect" data-back="2">← BACK</button>
-              <button class="btn-primary-rect" id="toStep4">CONTINUE TO FACE VERIFICATION →</button>
+              <button class="btn-minimal" data-back="2">← BACK</button>
+              <button class="btn-primary-minimal" id="toStep4">CONTINUE TO FACE VERIFICATION →</button>
             </div>
           </section>
 
@@ -399,9 +367,9 @@
           <section class="panel hidden" id="panel-4">
             <div class="panel-head">
               <h2>BIOMETRIC FACE VERIFICATION</h2>
-              <span class="panel-hint">MODULE // 04</span>
+              <span class="panel-hint">MOD // 04</span>
             </div>
-            <p class="muted">Compares 128-dimensional facial embeddings extracted from the document portrait against a live webcam photo or uploaded selfie.</p>
+            <p class="muted">Compares 128-dimensional facial neural embeddings from document portrait against live webcam capture.</p>
 
             <div class="face-grid">
               <div class="face-card">
@@ -420,12 +388,12 @@
                   </div>
                 </div>
                 <div class="camera-actions" style="margin-top: 10px; display: flex; gap: 8px;">
-                  <button class="btn-secondary-rect" id="openCameraBtn" style="flex:1;">📷 LIVE CAMERA</button>
+                  <button class="btn-minimal" id="openCameraBtn" style="flex:1;">📷 LIVE CAMERA</button>
                 </div>
               </div>
               <div class="face-card face-readout">
                 <h3>MATCH VERDICT</h3>
-                <button class="btn-primary-rect" id="runFaceBtn" disabled>RUN BIOMETRIC MATCH</button>
+                <button class="btn-primary-minimal" id="runFaceBtn" disabled>RUN BIOMETRIC MATCH</button>
                 <div class="readout-block">
                   <span class="readout-label">MODEL STATUS</span>
                   <span class="readout-value" id="faceModelStatus" style="font-size:12px; color:var(--text-secondary);">Loading models…</span>
@@ -442,8 +410,8 @@
             </div>
 
             <div class="panel-footer">
-              <button class="btn-secondary-rect" data-back="3">← BACK</button>
-              <button class="btn-primary-rect" id="toStep5">GENERATE RISK REPORT →</button>
+              <button class="btn-minimal" data-back="3">← BACK</button>
+              <button class="btn-primary-minimal" id="toStep5">GENERATE RISK REPORT →</button>
             </div>
           </section>
 
@@ -457,8 +425,8 @@
             <div class="report-top">
               <div class="risk-gauge large" id="riskGaugeLarge">
                 <svg viewBox="0 0 200 115" width="220">
-                  <path d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#222222" stroke-width="16" stroke-linecap="round"/>
-                  <path id="riskArcLarge" d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#4A9E5C" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 400"/>
+                  <path d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#1A1A1A" stroke-width="12" stroke-linecap="round"/>
+                  <path id="riskArcLarge" d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#4A9E5C" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 400"/>
                 </svg>
                 <span class="risk-gauge-value large" id="riskGaugeValueLarge">—</span>
                 <span class="risk-gauge-tag" id="riskGaugeTag">—</span>
@@ -478,8 +446,8 @@
             <pre class="raw-text mono" id="caseJson"></pre>
 
             <div class="panel-footer">
-              <button class="btn-secondary-rect" data-back="4">← BACK</button>
-              <button class="btn-primary-rect" id="downloadReport">DOWNLOAD CASE REPORT (.JSON)</button>
+              <button class="btn-minimal" data-back="4">← BACK</button>
+              <button class="btn-primary-minimal" id="downloadReport">DOWNLOAD CASE REPORT (.JSON)</button>
             </div>
           </section>
 
@@ -487,7 +455,7 @@
       </div>
 
       <footer class="footbar">
-        <span>SIH PROJECT // SASHASTRA SEEMA BAL (SSB) PROBLEM STATEMENT 26188 // 100% ON-DEVICE PROCESSING</span>
+        <span>SIH // PS 26188 // SSB // 100% ON-DEVICE LOCAL EXECUTION</span>
       </footer>
 
     </div>
@@ -498,13 +466,13 @@
     <div class="camera-dialog">
       <div class="camera-header">
         <span>📷 LIVE CAMERA SCAN</span>
-        <button class="btn-secondary-rect" id="closeCameraBtn">✕</button>
+        <button class="btn-minimal" id="closeCameraBtn">✕</button>
       </div>
       <div class="video-wrap">
         <video id="webcamVideo" autoplay playsinline></video>
       </div>
       <div class="camera-footer">
-        <button class="btn-primary-rect" id="captureCameraBtn">📸 CAPTURE PHOTO</button>
+        <button class="btn-primary-minimal" id="captureCameraBtn">📸 CAPTURE PHOTO</button>
       </div>
     </div>
   </div>
