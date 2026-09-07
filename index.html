@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SENTRY-DOC · Autonomous Identity & Document Screening Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="appContainer">
+
+  <!-- =========================================================================
+       VIEW 1: PRODUCT LANDING & PLATFORM OVERVIEW
+  ========================================================================= -->
+  <div id="landingView" class="view-screen">
+    
+    <!-- LANDING HEADER -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span class="brand-emblem">◈</span>
+        <div class="brand-meta">
+          <span class="brand-title">SENTRY-DOC</span>
+          <span class="brand-badge">BORDER DEFENSE OS v2.4</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#modules">System Modules</a>
+        <a href="#architecture">Layered Architecture</a>
+        <a href="#compliance">Security &amp; Standards</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="status-pill">
+          <span class="status-dot pulsing"></span>
+          <span>SYSTEM ONLINE</span>
+        </div>
+        <button class="btn-primary-glow" id="launchConsoleFromNav">Launch Console ➔</button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="overview">
+      <div class="hero-content">
+        <div class="tactical-badge">
+          <span class="badge-icon">🛡️</span>
+          <span>PROBLEM STATEMENT 26188 · MINISTRY OF HOME AFFAIRS / SSB</span>
+        </div>
+        <h1 class="hero-headline">Autonomous Document Screening &amp; Multi-Modal Fraud Forensics</h1>
+        <p class="hero-subtext">
+          Engineered for high-volume border checkpoints. Combines ICAO 9303 OCR parsing, algorithmic check-digit math, Error Level Analysis (ELA) image tampering forensics, and on-device biometric face matching in seconds.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn-hero-primary" id="launchConsoleBtn">
+            <span>Launch Operator Console</span>
+            <span class="arrow">➔</span>
+          </button>
+          <a href="#modules" class="btn-hero-secondary">Explore System Modules ↓</a>
+        </div>
+
+        <div class="hero-metrics-strip">
+          <div class="metric-card">
+            <span class="metric-num">&lt; 3s</span>
+            <span class="metric-lbl">Screening Latency</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <span class="metric-num">100%</span>
+            <span class="metric-lbl">On-Device Privacy</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <span class="metric-num">4-Tier</span>
+            <span class="metric-lbl">Fraud Detection Stack</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <span class="metric-num">ICAO 9303</span>
+            <span class="metric-lbl">Global Standard Math</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO INTERACTIVE TELEMETRY PREVIEW -->
+      <div class="hero-preview-card">
+        <div class="card-header-bar">
+          <div class="window-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="card-title-mono">SYSTEM_TELEMETRY // CHECKPOINT_SSB-01</span>
+          <span class="live-tag">LIVE SIMULATION</span>
+        </div>
+        <div class="card-body-preview">
+          <div class="scan-line-animation"></div>
+          <div class="preview-mock-grid">
+            <div class="preview-doc-box">
+              <div class="doc-overlay-tag">DOCUMENT ANALYZED</div>
+              <div class="mrz-highlight-box">
+                <code>P&lt;INDAPARNA&lt;&lt;SATYAM&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code><br>
+                <code>Z982104928IND9204128M3009121820419283401&lt;82</code>
+              </div>
+            </div>
+            <div class="preview-stats-box">
+              <div class="preview-stat-row">
+                <span>ICAO Checksum</span>
+                <span class="tag-pass">PASS (100%)</span>
+              </div>
+              <div class="preview-stat-row">
+                <span>ELA Compression Variance</span>
+                <span class="tag-pass">CLEAN (14/100)</span>
+              </div>
+              <div class="preview-stat-row">
+                <span>Biometric Match</span>
+                <span class="tag-pass">MATCH (0.24 DIST)</span>
+              </div>
+              <div class="preview-stat-row">
+                <span>Composite Risk</span>
+                <span class="tag-risk-low">LOW RISK (12/100)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-bar">
+          <span>STATUS: NO FORGERY SIGNATURES DETECTED</span>
+          <span class="mono-code">HASH: 9F8A2B..7C</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE MODULES SHOWCASE -->
+    <section class="section-container" id="modules">
+      <div class="section-head">
+        <span class="section-tag">CORE ARCHITECTURE</span>
+        <h2 class="section-title">The 4-Layer Screening Engine</h2>
+        <p class="section-desc">Each document passes through four independent analytical modules before synthesizing a unified decision report.</p>
+      </div>
+
+      <div class="modules-grid">
+        
+        <!-- MODULE 1 -->
+        <div class="module-card">
+          <div class="mod-icon">01</div>
+          <div class="mod-content">
+            <h3>OCR Extraction &amp; MRZ Parsing</h3>
+            <p>Automatically isolates Machine Readable Zones (MRZ) per ICAO 9303 specifications. Built-in OCR auto-correction repairs digit confusion ($O \rightarrow 0, I \rightarrow 1, Z \rightarrow 2$) in numeric blocks.</p>
+            <ul class="mod-list">
+              <li>Passport, Visa, National ID &amp; Licence support</li>
+              <li>Surname, Given Names, Passport No, DOB &amp; Expiry</li>
+              <li>Keyword-based fallback for visual zone text</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="mod-card highlight-border">
+          <div class="mod-icon">02</div>
+          <div class="mod-content">
+            <h3>Algorithmic Checksum Validation</h3>
+            <p>Applies strict modulo-10 weighted ($7, 3, 1$) mathematical verification over raw MRZ characters. Instantly catches printed text tampering or altered document numbers.</p>
+            <ul class="mod-list">
+              <li>Passport Number check digit math</li>
+              <li>Date of Birth &amp; Expiry sanity checks</li>
+              <li>Composite check digit overall integrity score</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="mod-card">
+          <div class="mod-icon">03</div>
+          <div class="mod-content">
+            <h3>Image Forensics &amp; ELA Tampering</h3>
+            <p>Error Level Analysis (ELA) re-compresses document canvases to reveal compression variance. Highlighted heatmaps expose spliced photos, altered numbers, or fake stamps alongside EXIF metadata scans.</p>
+            <ul class="mod-list">
+              <li>Pixel-level compression variance heatmap</li>
+              <li>Editing software signature detection (Photoshop/GIMP)</li>
+              <li>Localized anomaly &amp; photo-swap alert</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="mod-card">
+          <div class="mod-icon">04</div>
+          <div class="mod-content">
+            <h3>Biometric Face Verification</h3>
+            <p>Runs on-device ResNet deep facial neural networks to extract 128-dimensional biometric embeddings from document photos and live webcam captures for instant distance matching.</p>
+            <ul class="mod-list">
+              <li>128-d Euclidean distance face similarity</li>
+              <li>WebRTC Live Camera webcam capture modal</li>
+              <li>Anti-impersonation match/mismatch verdict</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LAYERED DEFENSE WORKFLOW -->
+    <section class="section-container dark-alt" id="architecture">
+      <div class="section-head">
+        <span class="section-tag">MULTI-MODAL RISK FUSION</span>
+        <h2 class="section-title">Composite Decision Support Engine</h2>
+        <p class="section-desc">Eliminates subjective human inspection errors by fusing signals into a single score.</p>
+      </div>
+
+      <div class="pipeline-flow">
+        <div class="flow-step">
+          <span class="step-num">STEP 1</span>
+          <h4>Document Upload</h4>
+          <p>Passport, Visa, or ID uploaded via drag-and-drop or scanner camera.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step">
+          <span class="step-num">STEP 2</span>
+          <h4>Multi-Module Scan</h4>
+          <p>OCR parsing, Checksum math, ELA forensics, and face matching run in parallel.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step">
+          <span class="step-num">STEP 3</span>
+          <h4>Risk Score Fusion</h4>
+          <p>Weighted scoring formula compiles risk score (0-100) with colour band.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step">
+          <span class="step-num">STEP 4</span>
+          <h4>Digital Audit Trail</h4>
+          <p>Generates downloadable JSON case record for law enforcement intelligence.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="cta-box">
+        <h2>Ready to run document screening?</h2>
+        <p>No backend setup or API key required. Everything processes securely on your device.</p>
+        <button class="btn-hero-primary" id="launchConsoleCta">Open Screening Console ➔</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="landing-footer">
+      <div class="footer-inner">
+        <div class="foot-brand">
+          <span class="brand-emblem">◈</span>
+          <span>SENTRY-DOC BORDER DEFENSE SYSTEM</span>
+        </div>
+        <p class="foot-copy">Developed for SIH Problem Statement 26188 — Ministry of Home Affairs, Sashastra Seema Bal (SSB).</p>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================================
+       VIEW 2: OPERATOR SCREENING CONSOLE
+  ========================================================================= -->
+  <div id="consoleView" class="view-screen hidden">
+
+    <div class="console">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div class="brand">
+          <button class="btn-back-landing" id="backToLandingBtn">← Overview</button>
+          <span class="brand-mark">◈</span>
+          <div class="brand-text">
+            <span class="brand-name">SENTRY-DOC CONSOLE</span>
+            <span class="brand-sub">Border Checkpoint Screening Terminal</span>
+          </div>
+        </div>
+        <div class="topbar-meta">
+          <div class="meta-item"><span class="meta-label">Checkpoint</span><span class="meta-value" id="checkpointId">SSB-DEMO-01</span></div>
+          <div class="meta-item"><span class="meta-label">Session ID</span><span class="meta-value" id="sessionId">—</span></div>
+          <button class="btn-ghost" id="newCaseBtn">New Case</button>
+        </div>
+      </header>
+
+      <div class="body-grid">
+
+        <!-- LEFT STEPPER -->
+        <nav class="stepper" id="stepper">
+          <div class="step active" data-step="1">
+            <span class="step-index">01</span>
+            <div class="step-copy">
+              <span class="step-title">Capture &amp; OCR</span>
+              <span class="step-desc">Extract document fields</span>
+            </div>
+            <span class="step-status" data-status="1"></span>
+          </div>
+          <div class="step" data-step="2">
+            <span class="step-index">02</span>
+            <div class="step-copy">
+              <span class="step-title">Validation</span>
+              <span class="step-desc">Check document rules</span>
+            </div>
+            <span class="step-status" data-status="2"></span>
+          </div>
+          <div class="step" data-step="3">
+            <span class="step-index">03</span>
+            <div class="step-copy">
+              <span class="step-title">Tampering Scan</span>
+              <span class="step-desc">ELA &amp; metadata analysis</span>
+            </div>
+            <span class="step-status" data-status="3"></span>
+          </div>
+          <div class="step" data-step="4">
+            <span class="step-index">04</span>
+            <div class="step-copy">
+              <span class="step-title">Face Verification</span>
+              <span class="step-desc">Match bearer portrait</span>
+            </div>
+            <span class="step-status" data-status="4"></span>
+          </div>
+          <div class="step" data-step="5">
+            <span class="step-index">05</span>
+            <div class="step-copy">
+              <span class="step-title">Risk Report</span>
+              <span class="step-desc">Composite decision</span>
+            </div>
+            <span class="step-status" data-status="5"></span>
+          </div>
+
+          <div class="risk-dock">
+            <span class="risk-dock-label">Composite Risk</span>
+            <div class="risk-gauge" id="riskGaugeMini">
+              <svg viewBox="0 0 120 68" width="100%">
+                <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
+                <path id="riskArc" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="#2FD46B" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 300"/>
+              </svg>
+              <span class="risk-gauge-value" id="riskGaugeValue">—</span>
+            </div>
+            <span class="risk-dock-tag" id="riskDockTag">NO CASE LOADED</span>
+          </div>
+        </nav>
+
+        <!-- MAIN WORKSPACE -->
+        <main class="workspace">
+
+          <!-- STEP 1: UPLOAD + OCR -->
+          <section class="panel" id="panel-1">
+            <div class="panel-head">
+              <h2>Capture &amp; OCR Extraction</h2>
+              <span class="panel-hint">MODULE 01</span>
+            </div>
+
+            <div class="upload-row">
+              <div class="upload-card" id="dropDoc">
+                <input type="file" id="docInput" accept="image/*" hidden />
+                <div class="upload-inner">
+                  <span class="upload-icon">⎘</span>
+                  <p><strong>Drop or select document image</strong></p>
+                  <p class="muted">Passport · Visa · National ID · Driving Licence · Permit</p>
+                </div>
+                <img id="docPreview" class="preview-img" hidden />
+              </div>
+
+              <div class="doc-type-select">
+                <label for="docType">Document Type Selection</label>
+                <select id="docType">
+                  <option value="passport">Passport (ICAO MRZ)</option>
+                  <option value="visa">Visa Document</option>
+                  <option value="national_id">National ID Card</option>
+                  <option value="driving_license">Driving Licence</option>
+                  <option value="permit">Permit Document</option>
+                </select>
+                <button class="btn-primary" id="runOcrBtn" disabled>Run OCR Extraction</button>
+                <div class="ocr-progress" id="ocrProgress" hidden>
+                  <div class="ocr-progress-bar" id="ocrProgressBar"></div>
+                  <span id="ocrProgressLabel">Initialising OCR engine…</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ocr-output" id="ocrOutput" hidden>
+              <div class="ocr-col">
+                <h3>Extracted Fields</h3>
+                <table class="field-table" id="fieldTable"></table>
+              </div>
+              <div class="ocr-col">
+                <h3>Raw OCR Text</h3>
+                <pre class="raw-text" id="rawText"></pre>
+                <h3 id="mrzHeading" hidden>MRZ Lines</h3>
+                <pre class="raw-text mono" id="mrzLines" hidden></pre>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <button class="btn-primary" id="toStep2" disabled>Continue to Validation →</button>
+            </div>
+          </section>
+
+          <!-- STEP 2: VALIDATION -->
+          <section class="panel hidden" id="panel-2">
+            <div class="panel-head">
+              <h2>Document Rule Validation</h2>
+              <span class="panel-hint">MODULE 02</span>
+            </div>
+            <p class="muted">Verifies ICAO 9303 modulo-10 weighted checksums, date range sanity, field completeness, and format conformity.</p>
+            <div class="rule-list" id="ruleList"></div>
+            <div class="panel-footer">
+              <button class="btn-secondary" data-back="1">← Back</button>
+              <button class="btn-primary" id="toStep3">Continue to Tampering Scan →</button>
+            </div>
+          </section>
+
+          <!-- STEP 3: TAMPERING -->
+          <section class="panel hidden" id="panel-3">
+            <div class="panel-head">
+              <h2>Tampering &amp; Forensics Detection</h2>
+              <span class="panel-hint">MODULE 03</span>
+            </div>
+            <p class="muted">Error Level Analysis (ELA) re-compresses the image canvas to expose JPEG compression variance (photo swapping, altered digits, or stamp pastes). Scans hidden EXIF metadata tags for editing signatures.</p>
+
+            <div class="tamper-grid">
+              <div class="tamper-col">
+                <h3>Original Render</h3>
+                <canvas id="canvasOriginal"></canvas>
+              </div>
+              <div class="tamper-col">
+                <h3>ELA Compression Heatmap</h3>
+                <canvas id="canvasELA"></canvas>
+              </div>
+              <div class="tamper-col tamper-readout">
+                <h3>Forensic Readout</h3>
+                <div class="readout-block">
+                  <span class="readout-label">ELA Anomaly Score</span>
+                  <span class="readout-value" id="elaScore">—</span>
+                </div>
+                <div class="readout-block">
+                  <span class="readout-label">Metadata Signature</span>
+                  <span class="readout-value" id="metaScore">—</span>
+                </div>
+                <ul class="flag-list" id="tamperFlags"></ul>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <button class="btn-secondary" data-back="2">← Back</button>
+              <button class="btn-primary" id="toStep4">Continue to Face Verification →</button>
+            </div>
+          </section>
+
+          <!-- STEP 4: FACE VERIFICATION -->
+          <section class="panel hidden" id="panel-4">
+            <div class="panel-head">
+              <h2>Biometric Face Verification</h2>
+              <span class="panel-hint">MODULE 04</span>
+            </div>
+            <p class="muted">Compares the facial embedding extracted from the document portrait against a live webcam or uploaded selfie of the bearer.</p>
+
+            <div class="face-grid">
+              <div class="face-card">
+                <h3>Document Portrait</h3>
+                <div class="face-box" id="faceBoxDoc"><canvas id="canvasDocFace"></canvas></div>
+              </div>
+              <div class="face-card">
+                <h3>Bearer Photo</h3>
+                <input type="file" id="selfieInput" accept="image/*" hidden />
+                <div class="face-box upload-target" id="selfieDrop">
+                  <canvas id="canvasSelfieFace" hidden></canvas>
+                  <div class="upload-inner" id="selfiePrompt">
+                    <span class="upload-icon">☺</span>
+                    <p><strong>Upload bearer photo</strong></p>
+                    <p class="muted">Click to select file</p>
+                  </div>
+                </div>
+                <div class="camera-actions" style="margin-top: 10px; display: flex; gap: 8px;">
+                  <button class="btn-secondary" id="openCameraBtn" style="flex:1;">📷 Live Camera</button>
+                </div>
+              </div>
+              <div class="face-card face-readout">
+                <h3>Match Verdict</h3>
+                <button class="btn-primary" id="runFaceBtn" disabled>Run Biometric Match</button>
+                <div class="readout-block">
+                  <span class="readout-label">Model Status</span>
+                  <span class="readout-value" id="faceModelStatus" style="font-size:12px; color:var(--muted);">Loading models…</span>
+                </div>
+                <div class="readout-block">
+                  <span class="readout-label">Face Distance</span>
+                  <span class="readout-value" id="faceSimilarity">—</span>
+                </div>
+                <div class="readout-block">
+                  <span class="readout-label">Verdict</span>
+                  <span class="readout-value" id="faceVerdict">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <button class="btn-secondary" data-back="3">← Back</button>
+              <button class="btn-primary" id="toStep5">Generate Risk Report →</button>
+            </div>
+          </section>
+
+          <!-- STEP 5: RISK REPORT -->
+          <section class="panel hidden" id="panel-5">
+            <div class="panel-head">
+              <h2>Composite Risk Report</h2>
+              <span class="panel-hint">DECISION SUPPORT OUTPUT</span>
+            </div>
+
+            <div class="report-top">
+              <div class="risk-gauge large" id="riskGaugeLarge">
+                <svg viewBox="0 0 200 115" width="220">
+                  <path d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#1E293B" stroke-width="16" stroke-linecap="round"/>
+                  <path id="riskArcLarge" d="M15,100 A85,85 0 0,1 185,100" fill="none" stroke="#2FD46B" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 400"/>
+                </svg>
+                <span class="risk-gauge-value large" id="riskGaugeValueLarge">—</span>
+                <span class="risk-gauge-tag" id="riskGaugeTag">—</span>
+              </div>
+              <div class="report-breakdown">
+                <h3>Score Breakdown</h3>
+                <div class="bar-row"><span>Document Validation</span><div class="bar"><div class="bar-fill" id="barValidation"></div></div><span id="valPts">—</span></div>
+                <div class="bar-row"><span>Tampering Signals</span><div class="bar"><div class="bar-fill" id="barTamper"></div></div><span id="tamperPts">—</span></div>
+                <div class="bar-row"><span>Biometric Mismatch</span><div class="bar"><div class="bar-fill" id="barFace"></div></div><span id="facePts">—</span></div>
+              </div>
+            </div>
+
+            <h3>Flagged Issues</h3>
+            <ul class="flag-list" id="finalFlags"></ul>
+
+            <h3>Digital Audit Trail (Case Record)</h3>
+            <pre class="raw-text mono" id="caseJson"></pre>
+
+            <div class="panel-footer">
+              <button class="btn-secondary" data-back="4">← Back</button>
+              <button class="btn-primary" id="downloadReport">Download Case Report (.json)</button>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <footer class="footbar">
+        <span>SENTRY-DOC Platform · Problem Statement 26188 · Ministry of Home Affairs — SSB · 100% On-Device Local Processing.</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- WEBRTC CAMERA MODAL -->
+  <div class="camera-modal hidden" id="cameraModal">
+    <div class="camera-dialog">
+      <div class="camera-header">
+        <span>📷 Live Camera Capture</span>
+        <button class="btn-ghost" id="closeCameraBtn">✕</button>
+      </div>
+      <div class="video-wrap">
+        <video id="webcamVideo" autoplay playsinline></video>
+      </div>
+      <div class="camera-footer">
+        <button class="btn-primary" id="captureCameraBtn">📸 Capture Photo</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
