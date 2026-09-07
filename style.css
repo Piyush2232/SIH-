@@ -551,3 +551,38 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
   border-top: 1px solid var(--border);
   padding-top: 16px;
 }
+
+/* DETAILED SCROLL SECTION OVERRIDES */
+.detail-block {
+  margin-bottom: 80px;
+}
+.detail-block:last-child {
+  margin-bottom: 0;
+}
+.scroll-title-small {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--text-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.scroll-desc-long p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 840px;
+}
+.scroll-desc-long p strong {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 32px;
+}
+@media (max-width: 900px) {
+  .scroll-title-small { font-size: 36px; }
+  .scroll-desc-long p { font-size: 16px; }
+}

@@ -45,25 +45,29 @@
       </div>
     </section>
     <section class="nothing-scroll-section" id="details">
-      <div class="scroll-content fade-in">
-        <h2 class="scroll-title">the truth is in the details.</h2>
-        <p class="scroll-desc">AuthentiQ is a next-generation forensic engine that runs entirely in your browser. Utilizing AI-powered Error Level Analysis (ELA) and biometric 128-dimensional facial matchings, it detects tampering, forged MRZ codes, and identity mismatches without ever sending a single pixel to the cloud.</p>
-        <div class="scroll-grid">
-          <div class="scroll-card">
-            <h3>01 / ELA</h3>
-            <p>JPEG quantization and EXIF forensics.</p>
+        <div class="scroll-content fade-in">
+          
+          <div class="detail-block">
+            <h2 class="scroll-title-small">how it works.</h2>
+            <div class="scroll-desc-long">
+              <p>AuthentiQ operates as a 100% client-side, zero-cloud forensic pipeline designed for immediate, local execution.</p>
+              <p><strong>1. MRZ Extraction & Cryptographic Validation:</strong> When a document is scanned, the image is parsed via an on-device Optical Character Recognition (OCR) model to extract the Machine Readable Zone (MRZ). A custom deterministic validation engine then cross-verifies ICAO 9303 modulo-10 checksums across document numbers, birth dates, and expiration dates to mathematically prove the cryptographic integrity of the document.</p>
+              <p><strong>2. Error Level Analysis (ELA):</strong> Simultaneously, the system performs deep-pixel forensic scans. By intentionally recompiling the document canvas at known compression thresholds and mapping the error variance, AuthentiQ generates a heatmap of JPEG quantization anomalies. This exposes cloned pixels, pasted text, and digital tampering that is entirely invisible to the naked eye.</p>
+              <p><strong>3. Biometric Verification:</strong> Finally, utilizing WebRTC and a local ResNet-34 neural network, the system maps 128-dimensional facial embeddings from a live webcam feed and computes the Euclidean distance against the extracted document portrait to verify the bearer's identity in real-time.</p>
+            </div>
           </div>
-          <div class="scroll-card">
-            <h3>02 / MRZ</h3>
-            <p>ICAO 9303 checksum verification.</p>
+          
+          <div class="detail-block">
+            <h2 class="scroll-title-small">why it matters.</h2>
+            <div class="scroll-desc-long">
+              <p>Traditional identity screening architectures rely heavily on sending sensitive Personally Identifiable Information (PII) to remote cloud servers via API endpoints. This creates immense privacy liabilities, introduces network latency, and renders the system useless in offline environments.</p>
+              <p>AuthentiQ flips this paradigm. Because it executes every single forensic layer—from OCR and ELA to complex neural face matching—directly within the browser using the local device's CPU/GPU, it completely eliminates cloud dependency.</p>
+              <p>This guarantees absolute data privacy, allows deployment in air-gapped or remote border checkpoints with zero network connectivity, and transforms any standard consumer laptop into a military-grade document verification terminal.</p>
+            </div>
           </div>
-          <div class="scroll-card">
-            <h3>03 / BIO</h3>
-            <p>ResNet-34 biometric face matching.</p>
-          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
 
 
   </div>
