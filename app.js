@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // Warm up face-api models in the background so step 4 feels instant.
   loadFaceModels();
+  // Initialize SEVE ASCII-art background engine
+  initAsciiBackground();
 });
 
 function wireViewNavigation() {
@@ -69,6 +71,66 @@ function wireViewNavigation() {
 function startNewCase() {
   state.sessionId = 'SD-' + Math.random().toString(36).slice(2, 8).toUpperCase();
   document.getElementById('sessionId').textContent = state.sessionId;
+}
+
+/* ---------------------------------------------------------------------
+   SEVE ASCII ART ENGINE INITIALIZATION & HUD CONTROLS
+--------------------------------------------------------------------- */
+function initAsciiBackground() {
+  const canvas = document.getElementById('asciiBgCanvas');
+  if (!canvas || !window.SeveAsciiEngine) return;
+
+  const engine = new window.SeveAsciiEngine(canvas);
+  window.asciiEngine = engine;
+  engine.start();
+
+  // Try pre-loading sample_passport.png if available for immediate real-world subject
+  const sampleImg = new Image();
+  sampleImg.onload = () => {
+    if (!state.docImage) engine.setSourceImage(sampleImg);
+  };
+  sampleImg.src = 'sample_passport.png';
+
+  // Wire Nothing-styled HUD buttons
+  const modeBtn = document.getElementById('asciiModeBtn');
+  const styleBtn = document.getElementById('asciiStyleBtn');
+  const toggleBtn = document.getElementById('asciiToggleBtn');
+
+  const modes = [
+    "characters", "matrix", "hexdump", "braille", "contour",
+    "dots", "cross", "diamond", "dither", "mosaic", "halfblocks",
+    "disco", "rings", "hearts", "stars", "hexagons", "triangles", "bubbles", "hatch"
+  ];
+  let modeIdx = 0;
+
+  if (modeBtn) {
+    modeBtn.addEventListener('click', () => {
+      modeIdx = (modeIdx + 1) % modes.length;
+      const m = modes[modeIdx];
+      engine.config.renderMode = m;
+      modeBtn.textContent = `[ASCII: ${m.toUpperCase()}]`;
+    });
+  }
+
+  const styles = ["flicker", "wave", "pulse", "shimmer", "ripple"];
+  let styleIdx = 0;
+  if (styleBtn) {
+    styleBtn.addEventListener('click', () => {
+      styleIdx = (styleIdx + 1) % styles.length;
+      const s = styles[styleIdx];
+      engine.config.animStyle = s;
+      styleBtn.textContent = `[ANIM: ${s.toUpperCase()}]`;
+    });
+  }
+
+  let enabled = true;
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      enabled = !enabled;
+      canvas.style.opacity = enabled ? '0.38' : '0';
+      toggleBtn.textContent = enabled ? '[FX: ON]' : '[FX: OFF]';
+    });
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -127,7 +189,12 @@ function wireUpload() {
       preview.src = e.target.result;
       preview.hidden = false;
       const img = new Image();
-      img.onload = () => { state.docImage = img; };
+      img.onload = () => {
+        state.docImage = img;
+        if (window.asciiEngine) {
+          window.asciiEngine.setSourceImage(img);
+        }
+      };
       img.src = e.target.result;
       document.getElementById('runOcrBtn').disabled = false;
     };
@@ -659,6 +726,9 @@ function wireFace() {
     const canvas = document.getElementById('canvasSelfieFace');
     canvas.hidden = false;
     await detectAndDraw(img, canvas, 'selfie');
+    if (window.asciiEngine) {
+      window.asciiEngine.setSourceImage(img);
+    }
   });
   document.getElementById('runFaceBtn').addEventListener('click', runFaceMatch);
 
@@ -706,6 +776,9 @@ function wireFace() {
         const canvas = document.getElementById('canvasSelfieFace');
         canvas.hidden = false;
         await detectAndDraw(img, canvas, 'selfie');
+        if (window.asciiEngine) {
+          window.asciiEngine.setSourceImage(img);
+        }
         stopCamera();
       };
       img.src = tmpCanvas.toDataURL('image/jpeg');

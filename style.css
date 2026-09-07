@@ -55,9 +55,64 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-#appContainer { min-height: 100vh; }
+#asciiBgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.38;
+  transition: opacity 300ms var(--ease);
+}
+
+#appContainer {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
 .hidden { display: none !important; }
 .muted { color: var(--text-secondary); font-size: 13px; }
+
+/* ---- ASCII CONTROLLER HUD (NOTHING-DESIGN FLOATING BADGE) ---- */
+.ascii-hud {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-visible);
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hud-btn {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  padding: 4px 6px;
+  transition: color 150ms var(--ease);
+}
+
+.hud-btn:hover {
+  color: var(--text-display);
+}
+
+.hud-btn:active {
+  color: var(--accent);
+}
 
 /* ---- LABEL-MONO — tertiary layer ---- */
 .label-mono {
@@ -91,7 +146,9 @@ html, body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--black);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-left {
@@ -254,7 +311,9 @@ html, body {
 .widget {
   border: 1px solid var(--border-visible);
   border-radius: 8px;
-  background: var(--surface);
+  background: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   max-width: 560px;
   margin-left: auto;
 }
@@ -435,7 +494,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--black);
+  background: transparent;
 }
 
 /* TOP BAR */
@@ -445,6 +504,9 @@ html, body {
   align-items: center;
   padding: var(--space-md) var(--space-2xl);
   border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .t-bar-left {
@@ -487,7 +549,9 @@ html, body {
   gap: 0;
   padding: 0 var(--space-2xl);
   border-bottom: 1px solid var(--border);
-  background: var(--black);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .step {

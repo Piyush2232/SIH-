@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<!-- SEVE ASCII ART BACKGROUND CANVAS (21ST.DEV PIPELINE) -->
+<canvas id="asciiBgCanvas"></canvas>
+
 <div id="appContainer">
 
   <!-- ===================================================================
@@ -421,8 +424,16 @@
 
 </div>
 
+<!-- ASCII EFFECT CONTROLLER HUD (MINIMALIST NOTHING-STYLE) -->
+<aside class="ascii-hud" aria-label="ASCII Background Controls">
+  <button class="hud-btn" id="asciiModeBtn" title="Cycle ASCII Render Mode">[ASCII: CHARACTERS]</button>
+  <button class="hud-btn" id="asciiStyleBtn" title="Cycle Animation Style">[ANIM: FLICKER]</button>
+  <button class="hud-btn" id="asciiToggleBtn" title="Toggle ASCII Background">[FX: ON]</button>
+</aside>
+
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="ascii-effect.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
