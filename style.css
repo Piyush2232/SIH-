@@ -565,17 +565,19 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
 }
 .scroll-title-small {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 0.9;
   color: var(--text-display);
+  margin-bottom: 32px;
   letter-spacing: -0.02em;
-  margin-bottom: 24px;
 }
 .scroll-desc-long p {
   font-size: 18px;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 24px;
-  max-width: 840px;
+  max-width: 600px;
 }
 .scroll-desc-long p strong {
   color: var(--text-primary);
@@ -587,8 +589,22 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
   margin-top: 32px;
 }
 @media (max-width: 900px) {
-  .scroll-title-small { font-size: 36px; }
-  .scroll-desc-long p { font-size: 16px; }
+  .scroll-title-small {
+  font-family: var(--font-display);
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 0.9;
+  color: var(--text-display);
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+  .scroll-desc-long p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
 }
 
 @keyframes appleFall {
@@ -598,4 +614,9 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
   82% { transform: rotate(2deg) translateY(5px); } /* Hit ground */
   93% { transform: rotate(3deg) translateY(-20px); } /* Small bounce */
   100% { transform: rotate(2deg) translateY(-20px); opacity: 1; } /* Final rest */
+}
+
+@media (max-width: 900px) {
+  .scroll-title-small { font-size: 60px !important; }
+  .scroll-desc-long p { font-size: 16px !important; }
 }
