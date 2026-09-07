@@ -30,15 +30,19 @@ html, body {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
+  width: 100%;
+  border: none;
 }
 
-#appContainer { min-height: 100vh; position: relative; }
+#appContainer { min-height: 100vh; position: relative; width: 100%; border: none; }
 .hidden { display: none !important; }
 .muted { color: var(--text-secondary); font-size: 12.5px; }
 
 /* =========================================================================
-   NAVBAR (ULTRA MINIMALIST)
+   NAVBAR (ULTRA MINIMALIST — NO VERTICAL BORDERS)
 ========================================================================= */
 .navbar {
   display: flex;
@@ -46,10 +50,15 @@ html, body {
   align-items: center;
   padding: 20px 48px;
   border-bottom: 1px solid var(--border);
+  border-top: none;
+  border-left: none;
+  border-right: none;
   background: var(--black);
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .nav-brand { display: flex; align-items: center; gap: 10px; }
