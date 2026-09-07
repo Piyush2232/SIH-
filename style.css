@@ -164,6 +164,8 @@ html, body {
 }
 
 .id-wireframe {
+  animation: appleFall 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+
   width: 400px;
   height: 260px;
   border: 1px solid var(--text-disabled);
@@ -385,6 +387,8 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
     font-size: 60px;
   }
   .id-wireframe {
+  animation: appleFall 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+
     transform: none;
     width: 320px;
   }
@@ -585,4 +589,13 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
 @media (max-width: 900px) {
   .scroll-title-small { font-size: 36px; }
   .scroll-desc-long p { font-size: 16px; }
+}
+
+@keyframes appleFall {
+  0% { transform: rotate(-10deg) translateY(-120vh); opacity: 0; }
+  40% { transform: rotate(2deg) translateY(10px); opacity: 1; } /* Hit ground hard */
+  65% { transform: rotate(6deg) translateY(-80px); } /* Bounce up */
+  82% { transform: rotate(2deg) translateY(5px); } /* Hit ground */
+  93% { transform: rotate(3deg) translateY(-20px); } /* Small bounce */
+  100% { transform: rotate(2deg) translateY(-20px); opacity: 1; } /* Final rest */
 }
