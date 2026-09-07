@@ -14,173 +14,43 @@
 <div id="appContainer">
 
   <!-- =========================================================================
-       VIEW 1: LANDING OVERVIEW (ULTRA MINIMALIST NOTHING STYLE)
+       VIEW 1: LANDING OVERVIEW (NOTHING STYLE)
   ========================================================================= -->
   <div id="landingView" class="view-screen">
     
-    <!-- MINIMAL NAVBAR -->
-    <header class="navbar">
-      <div class="nav-brand">
-        <span class="signal-dot">●</span>
-        <span class="brand-title">SIH // 26188</span>
-      </div>
-      <nav class="nav-links">
-        <a href="#overview">[OVERVIEW]</a>
-        <a href="#modules">[MODULES]</a>
-        <a href="#pipeline">[PIPELINE]</a>
+    <header class="nothing-navbar">
+      <div class="nothing-logo">SIH (1)</div>
+      <nav class="nothing-nav">
+        <a href="#">Specs</a>
+        <a href="#">Forensics</a>
       </nav>
-      <div class="nav-actions">
-        <span class="sys-status">[AIR-GAPPED]</span>
-        <button class="btn-minimal" id="launchConsoleFromNav">LAUNCH TERMINAL ➔</button>
+      <div class="nothing-nav-right">
+        <button class="nothing-btn-outline" id="launchConsoleFromNav">Console</button>
       </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="overview">
-      <div class="hero-content">
-        <div class="meta-tag">PS 26188 // MINISTRY OF HOME AFFAIRS — SSB</div>
-        <h1 class="hero-headline">SIH // 26188</h1>
-        <p class="hero-subtext">
-          Autonomous document screening and multi-modal fraud forensics. 100% on-device local execution for high-volume border checkpoints.
-        </p>
-        <div class="hero-ctas">
-          <button class="btn-primary-minimal" id="launchConsoleBtn">
-            <span>LAUNCH SCREENING TERMINAL</span>
-            <span class="arrow">➔</span>
-          </button>
-        </div>
-
-        <!-- MINIMAL TELEMETRY STRIP -->
-        <div class="telemetry-strip">
-          <div class="t-block">
-            <span class="t-val">&lt;3.0S</span>
-            <span class="t-lbl">LATENCY</span>
-          </div>
-          <div class="t-block">
-            <span class="t-val">100%</span>
-            <span class="t-lbl">LOCAL PRIVACY</span>
-          </div>
-          <div class="t-block">
-            <span class="t-val">04-TIER</span>
-            <span class="t-lbl">DEFENSE STACK</span>
-          </div>
-          <div class="t-block">
-            <span class="t-val">ICAO 9303</span>
-            <span class="t-lbl">COMPLIANCE</span>
-          </div>
-        </div>
+    <section class="nothing-hero">
+      <div class="nothing-hero-content">
+        <h1 class="nothing-title">pure<br>verification.</h1>
+        <p class="nothing-subtitle">Zero cloud. 100% on-device forensic document screening.</p>
+        <button class="nothing-btn-pill" id="launchConsoleBtn">Launch Terminal</button>
       </div>
-
-      <!-- MINIMAL WIDGET -->
-      <div class="hero-widget">
-        <div class="widget-header">
-          <span class="widget-title">TELEMETRY // CHECKPOINT_SSB-01</span>
-          <span class="signal-tag">[LIVE]</span>
-        </div>
-        <div class="widget-body">
-          <div class="mono-box">
-            <div class="mono-line-header">[MRZ STREAM]</div>
-            <code class="mrz-text">P&lt;INDAPARNA&lt;&lt;SATYAM&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>
-            <code class="mrz-text">Z982104928IND9204128M3009121820419283401&lt;82</code>
+      <div class="nothing-hero-visual">
+        <div class="id-wireframe">
+          <div class="wire-photo"></div>
+          <div class="wire-lines">
+            <div class="w-line"></div>
+            <div class="w-line"></div>
+            <div class="w-line short"></div>
           </div>
-
-          <div class="widget-readout">
-            <div class="r-row">
-              <span>ICAO CHECKSUM</span>
-              <span class="val-success">MOD-10 PASS</span>
-            </div>
-            <div class="r-row">
-              <span>ELA VARIANCE</span>
-              <span class="val-success">CLEAN [STD 14.2]</span>
-            </div>
-            <div class="r-row">
-              <span>FACE MATCH</span>
-              <span class="val-success">VERIFIED [0.24]</span>
-            </div>
-            <div class="r-row highlight">
-              <span>COMPOSITE RISK</span>
-              <span class="val-success">12 / 100 [LOW RISK]</span>
-            </div>
-          </div>
+          <div class="wire-mrz"></div>
+          <div class="wire-mrz"></div>
+          <div class="red-dot"></div>
         </div>
       </div>
     </section>
-
-    <!-- MINIMAL MODULES GRID -->
-    <section class="section-container" id="modules">
-      <div class="section-head">
-        <span class="section-tag">[SYSTEM MODULES]</span>
-        <h2 class="section-title">THE 04 CORE LAYERS</h2>
-      </div>
-
-      <div class="minimal-grid">
-        <div class="min-card">
-          <span class="min-num">01</span>
-          <h3>OCR &amp; MRZ PARSING</h3>
-          <p>Scans Machine Readable Zones per ICAO 9303. Auto-corrects OCR digit confusion ($O \rightarrow 0, I \rightarrow 1, Z \rightarrow 2$).</p>
-        </div>
-
-        <div class="min-card">
-          <span class="min-num">02</span>
-          <h3>CHECKSUM VALIDATION</h3>
-          <p>Modulo-10 weighted ($7, 3, 1$) mathematical check digits over raw MRZ fields + Interpol SLTD watchlist verification.</p>
-        </div>
-
-        <div class="min-card">
-          <span class="min-num">03</span>
-          <h3>ELA FORENSICS SCAN</h3>
-          <p>Error Level Analysis re-compresses document canvases to expose JPEG quantization variance and editing metadata.</p>
-        </div>
-
-        <div class="min-card">
-          <span class="min-num">04</span>
-          <h3>BIOMETRIC FACE MATCH</h3>
-          <p>Extracts 128-dimensional deep face neural embeddings from document portrait and live WebRTC camera capture.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PIPELINE -->
-    <section class="section-container" id="pipeline">
-      <div class="section-head">
-        <span class="section-tag">[EXECUTION FLOW]</span>
-        <h2 class="section-title">SCREENING PIPELINE</h2>
-      </div>
-
-      <div class="pipeline-row">
-        <div class="pipe-item">
-          <span class="p-num">01</span>
-          <h4>INPUT</h4>
-          <p>Document scan stream.</p>
-        </div>
-        <div class="pipe-item">
-          <span class="p-num">02</span>
-          <h4>ANALYSIS</h4>
-          <p>OCR, math, ELA, face match.</p>
-        </div>
-        <div class="pipe-item">
-          <span class="p-num">03</span>
-          <h4>FUSION</h4>
-          <p>Weighted 0–100 risk score.</p>
-        </div>
-        <div class="pipe-item">
-          <span class="p-num">04</span>
-          <h4>AUDIT</h4>
-          <p>JSON case record.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="landing-footer">
-      <div class="footer-inner">
-        <span>SIH // PS 26188 // SSB</span>
-        <span>100% LOCAL EXECUTION</span>
-      </div>
-    </footer>
 
   </div>
-
 
   <!-- =========================================================================
        VIEW 2: OPERATOR SCREENING TERMINAL (MINIMALIST CONSOLE)
