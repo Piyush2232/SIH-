@@ -77,9 +77,26 @@ function startNewCase() {
 function goToStep(n) {
   for (let i = 1; i <= 5; i++) {
     document.getElementById('panel-' + i).classList.toggle('hidden', i !== n);
-    const stepEl = document.querySelector(`.step[data-step="${i}"]`);
-    stepEl.classList.toggle('active', i === n);
-    stepEl.classList.toggle('done', i < n);
+    const stepEl = document.querySelector('.step[data-step="' + i + '"]');
+    if(stepEl) {
+        stepEl.classList.toggle('active', i === n);
+        stepEl.classList.toggle('done', i < n);
+    }
+  }
+
+  const guides = {
+    1: { title: "CAPTURE AND OCR", desc: "Upload a passport image or capture via webcam. The system extracts the Machine Readable Zone (MRZ) and parses identity fields." },
+    2: { title: "VALIDATION", desc: "Verifies ICAO 9303 modulo-10 check digits, expiration dates, field completeness, and checks against the local SLTD database." },
+    3: { title: "TAMPERING SCAN", desc: "Error Level Analysis (ELA) re-compresses document canvases to expose JPEG quantization variance and EXIF signatures." },
+    4: { title: "FACE VERIFICATION", desc: "Compares 128-dimensional facial neural embeddings from the document portrait against a live webcam capture or selfie." },
+    5: { title: "RISK REPORT", desc: "Generates a composite risk score and a fully air-gapped cryptographic JSON audit trail of the forensics." }
+  };
+  const guide = guides[n];
+  const titleEl = document.getElementById('guideTitle');
+  const descEl = document.getElementById('guideDesc');
+  if (titleEl && descEl && guide) {
+    titleEl.innerText = guide.title;
+    descEl.innerText = guide.desc;
   }
 }
 
