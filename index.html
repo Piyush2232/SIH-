@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIH Project · Minimalist Document Screening</title>
+<title>AuthentiQ · Minimalist Document Screening</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <div id="landingView" class="view-screen">
     
     <header class="nothing-navbar">
-      <div class="nothing-logo">SIH (1)</div>
+      <div class="nothing-logo">AuthentiQ</div>
       <nav class="nothing-nav">
         <a href="#">Specs</a>
         <a href="#">Forensics</a>
@@ -49,6 +49,27 @@
         </div>
       </div>
     </section>
+    <section class="nothing-scroll-section">
+      <div class="scroll-content fade-in">
+        <h2 class="scroll-title">the truth is in the details.</h2>
+        <p class="scroll-desc">AuthentiQ is a next-generation forensic engine that runs entirely in your browser. Utilizing AI-powered Error Level Analysis (ELA) and biometric 128-dimensional facial matchings, it detects tampering, forged MRZ codes, and identity mismatches without ever sending a single pixel to the cloud.</p>
+        <div class="scroll-grid">
+          <div class="scroll-card">
+            <h3>01 / ELA</h3>
+            <p>JPEG quantization and EXIF forensics.</p>
+          </div>
+          <div class="scroll-card">
+            <h3>02 / MRZ</h3>
+            <p>ICAO 9303 checksum verification.</p>
+          </div>
+          <div class="scroll-card">
+            <h3>03 / BIO</h3>
+            <p>ResNet-34 biometric face matching.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
   </div>
 
@@ -64,7 +85,7 @@
         <div class="brand">
           <button class="btn-minimal" id="backToLandingBtn">← OVERVIEW</button>
           <span class="signal-dot">●</span>
-          <span class="brand-title">SIH // TERMINAL</span>
+          <span class="brand-title">AuthentiQ Console</span>
         </div>
         <div class="topbar-meta">
           <div class="meta-item"><span class="meta-label">CHECKPOINT</span><span class="meta-value" id="checkpointId">SSB-DEMO-01</span></div>
@@ -325,7 +346,7 @@
       </div>
 
       <footer class="footbar">
-        <span>SIH // PS 26188 // SSB // 100% ON-DEVICE LOCAL EXECUTION</span>
+        <span>AuthentiQ // 100% ON-DEVICE LOCAL EXECUTION</span>
       </footer>
 
     </div>
@@ -352,5 +373,19 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 <script src="app.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+</script>
 </body>
 </html>
