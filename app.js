@@ -933,3 +933,17 @@ function downloadReport() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+
+// Parallax fall animation for wireframe
+window.addEventListener('scroll', () => {
+  const wireframe = document.querySelector('.id-wireframe');
+  if (wireframe && window.innerWidth > 900) { // Only animate on desktop to prevent mobile mess
+    const scrollY = window.scrollY;
+    const yOffset = -20 + (scrollY * 0.8);
+    const rotateZ = 2 + (scrollY * 0.05);
+    const rotateX = scrollY * 0.05;
+    const rotateY = scrollY * -0.05;
+    wireframe.style.transform = "perspective(1000px) translateY(" + yOffset + "px) rotateZ(" + rotateZ + "deg) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+  }
+});
