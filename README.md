@@ -1,4 +1,4 @@
-# SENTRY-DOC — AI-Based Fake Identity & Document Screening (Prototype)
+# SIH Project — AI-Based Fake Identity & Document Screening (Prototype)
 
 Prototype for SIH Problem Statement **26188** — Ministry of Home Affairs, Sashastra Seema Bal (SSB).
 
