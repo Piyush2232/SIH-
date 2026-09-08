@@ -206,7 +206,8 @@ function processOcrText() {
   if (mrz.length >= 2) {
     mrzHeading.hidden = false;
     mrzBox.hidden = false;
-    mrzBox.textContent = mrz.join('\n');
+    mrzBox.textContent = mrz.join('
+');
     state.fields = parseMrz(mrz);
   } else {
     mrzHeading.hidden = true;
@@ -223,7 +224,14 @@ function processOcrText() {
 
   if (isLikelyNotDocument) {
     state.isDocValid = false;
-    rawTextEl.textContent = "\n[!] INVALID DOCUMENT DETECTED\n\nThe AI could not detect any identity fields or readable text.\nPlease upload a clear, well-lit image of a valid Passport or ID document.\n\nRaw Output:\n" + (text.trim() || '(none)');
+    rawTextEl.textContent = "
+[!] INVALID DOCUMENT DETECTED
+
+The AI could not detect any identity fields or readable text.
+Please upload a clear, well-lit image of a valid Passport or ID document.
+
+Raw Output:
+" + (text.trim() || '(none)');
     rawTextEl.style.color = 'var(--high)';
     document.getElementById('fieldList').innerHTML = '<li class="fail">Document validation blocked. Please try another image.</li>';
     const nextBtn = document.getElementById('toStep2');
@@ -266,7 +274,8 @@ function labelize(key) {
 /* ---- MRZ extraction & ICAO 9303 parsing ---- */
 function extractMrzLines(text) {
   const candidates = text
-    .split('\n')
+    .split('
+')
     .map(l => l.toUpperCase().replace(/[^A-Z0-9<]/g, ''))
     .filter(l => l.length >= 28 && (l.match(/</g) || []).length >= 2);
   // Prefer the last two matching lines of similar (near-44) length — typical MRZ block position.
@@ -825,7 +834,11 @@ async function detectAndDraw(img, canvas, which) {
       if (which === 'doc') state.face.docDescriptor = detection.descriptor;
       else state.face.selfieDescriptor = detection.descriptor;
     } else {
-      ctx.fillStyle = 'rgba(229,72,77,0.15)';
+      ctx.fillStyle = 'rgba(229,72,77,0.5)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '14px monospace';
+        ctx.fillText('NO FACE DETECTED', 10, canvas.height / 2);
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
   } catch (err) {
@@ -834,6 +847,8 @@ async function detectAndDraw(img, canvas, which) {
 
   if (state.face.docDescriptor && state.face.selfieDescriptor) {
     document.getElementById('runFaceBtn').disabled = false;
+  } else {
+    document.getElementById('runFaceBtn').disabled = true;
   }
 }
 
