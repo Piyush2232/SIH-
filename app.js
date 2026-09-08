@@ -226,7 +226,9 @@ function processOcrText() {
     rawTextEl.textContent = "\n[!] INVALID DOCUMENT DETECTED\n\nThe AI could not detect any identity fields or readable text.\nPlease upload a clear, well-lit image of a valid Passport or ID document.\n\nRaw Output:\n" + (text.trim() || '(none)');
     rawTextEl.style.color = 'var(--high)';
     document.getElementById('fieldList').innerHTML = '<li class="fail">Document validation blocked. Please try another image.</li>';
-    document.getElementById('toStep2').disabled = true;
+    const nextBtn = document.getElementById('toStep2');
+    nextBtn.disabled = true;
+    nextBtn.classList.remove('active-btn');
     markStepStatus(1, false);
     
     // Poison the validation state so bypassing guarantees Critical Risk
@@ -235,7 +237,9 @@ function processOcrText() {
   } else {
     state.isDocValid = true;
     renderFieldTable(state.fields);
-    document.getElementById('toStep2').disabled = false;
+    const nextBtn = document.getElementById('toStep2');
+    nextBtn.disabled = false;
+    nextBtn.classList.add('active-btn');
     markStepStatus(1, true);
   }
 }

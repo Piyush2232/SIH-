@@ -658,3 +658,6 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
   border-color: var(--success) !important;
   color: var(--success) !important;
 }
+
+.btn-primary-minimal.active-btn { background: var(--text-display) !important; color: var(--black) !important; pointer-events: auto; opacity: 1; }
+.btn-primary-minimal:disabled { background: var(--text-disabled) !important; color: var(--text-secondary) !important; pointer-events: none; opacity: 0.5; }
