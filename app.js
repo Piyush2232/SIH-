@@ -757,46 +757,71 @@ function wireFace() {
   const cameraModal = document.getElementById('cameraModal');
   const videoEl = document.getElementById('webcamVideo');
 
-  if (openCamBtn) {
-    openCamBtn.addEventListener('click', async () => {
-      try {
-        cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-        videoEl.srcObject = cameraStream;
-        cameraModal.classList.remove('hidden');
-      } catch (err) {
-        alert('Could not access camera: ' + err.message);
-      }
-    });
-  }
-
   function stopCamera() {
     if (cameraStream) {
       cameraStream.getTracks().forEach(track => track.stop());
       cameraStream = null;
     }
-    cameraModal.classList.add('hidden');
+    if (videoEl) videoEl.srcObject = null;
+    if (cameraModal) cameraModal.classList.add('hidden');
+  }
+
+  if (openCamBtn) {
+    openCamBtn.addEventListener('click', async () => {
+      // Check if getUserMedia is even available (blocked on file://)
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('Live Camera requires serving this page via localhost.\n\nRun: python -m http.server 8000\nThen open: http://localhost:8000\n\nAlternatively, upload a selfie photo using the upload box above.');
+        return;
+      }
+      try {
+        cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
+        videoEl.srcObject = cameraStream;
+        // Wait for the video to actually start playing before showing the modal
+        await new Promise((resolve, reject) => {
+          videoEl.onplaying = resolve;
+          videoEl.onerror = reject;
+          setTimeout(() => reject(new Error('Camera stream timed out')), 5000);
+          videoEl.play().catch(reject);
+        });
+        cameraModal.classList.remove('hidden');
+      } catch (err) {
+        stopCamera();
+        alert('Could not access camera: ' + err.message + '\n\nTip: If you opened this via file://, use localhost instead.\nOr upload a selfie photo using the upload box.');
+      }
+    });
   }
 
   if (closeCamBtn) closeCamBtn.addEventListener('click', stopCamera);
 
   if (captureCamBtn) {
     captureCamBtn.addEventListener('click', async () => {
-      if (!videoEl.videoWidth) return;
+      if (!videoEl || !videoEl.videoWidth || videoEl.videoWidth === 0) {
+        alert('Camera is not ready yet. Please wait a moment and try again.');
+        return;
+      }
+      // Grab the current video frame
       const tmpCanvas = document.createElement('canvas');
       tmpCanvas.width = videoEl.videoWidth;
       tmpCanvas.height = videoEl.videoHeight;
-      const ctx = tmpCanvas.getContext('2d');
-      ctx.drawImage(videoEl, 0, 0);
+      const tmpCtx = tmpCanvas.getContext('2d');
+      tmpCtx.drawImage(videoEl, 0, 0, tmpCanvas.width, tmpCanvas.height);
+      const dataUrl = tmpCanvas.toDataURL('image/jpeg', 0.92);
 
+      // Stop the camera immediately so the user sees the result
+      stopCamera();
+
+      // Load captured frame into an Image for face detection
       const img = new Image();
       img.onload = async () => {
         document.getElementById('selfiePrompt').hidden = true;
         const canvas = document.getElementById('canvasSelfieFace');
         canvas.hidden = false;
         await detectAndDraw(img, canvas, 'selfie');
-        stopCamera();
       };
-      img.src = tmpCanvas.toDataURL('image/jpeg');
+      img.onerror = () => {
+        alert('Failed to process captured photo. Please try uploading a selfie instead.');
+      };
+      img.src = dataUrl;
     });
   }
 }
