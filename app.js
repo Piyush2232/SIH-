@@ -840,15 +840,28 @@ function wireReport() {
 function computeComposite() {
   const v = state.validation.score || 0;
   const t = state.tamper.score || 0;
-  const fScore = state.face.score != null ? state.face.score : 50; // neutral if not run
-  const composite = Math.round(v * 0.35 + t * 0.35 + fScore * 0.30);
+  // If face verification is skipped, base risk floor is 50 (Manual Review)
+  const fScore = state.face.score != null ? state.face.score : 50; 
+
+  // 1. Highest Watermark System
+  let composite = Math.max(v, t, fScore);
+
+  // 2. Critical Overrides (Auto-Reject)
+  const hasCriticalValidation = state.validation.rules.some(r => r.status === 'fail');
+  const faceFailed = state.face.verdict === 'NO MATCH';
+  
+  if (hasCriticalValidation || faceFailed) {
+    composite = 100; // Force maximum risk
+  }
+
   return { composite: Math.min(100, composite), v, t, f: fScore };
 }
 
 function bandFor(score) {
-  if (score <= 30) return { label: 'LOW RISK', color: 'var(--low)' };
-  if (score <= 60) return { label: 'MEDIUM RISK', color: 'var(--mid)' };
-  return { label: 'HIGH RISK', color: 'var(--high)' };
+  if (score >= 100) return { label: 'CRITICAL RISK (AUTO-REJECT)', color: 'var(--high)' };
+  if (score <= 30) return { label: 'LOW RISK (APPROVED)', color: 'var(--low)' };
+  if (score <= 60) return { label: 'MODERATE RISK (MANUAL REVIEW)', color: 'var(--mid)' };
+  return { label: 'HIGH RISK (REJECTED)', color: 'var(--high)' };
 }
 
 function setGauge(arcId, valueId, tagId, score, radiusLen) {
