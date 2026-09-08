@@ -1091,8 +1091,19 @@ function downloadReport() {
 
 
 async function generateSHA256(str) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder("utf-8").encode(str));
-  return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
+  if (window.crypto && crypto.subtle) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder("utf-8").encode(str));
+    return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
+  } else {
+    // Fallback if not running on HTTPS or localhost (where crypto.subtle is disabled)
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return Math.abs(hash).toString(16).padStart(64, '0'); // fake SHA format for file:// testing
+  }
 }
 
 async function commitToBlockchain() {
@@ -1102,8 +1113,9 @@ async function commitToBlockchain() {
   btn.disabled = true;
   btn.textContent = 'COMMITTING...';
 
-  const recordStr = document.getElementById('caseJson').textContent;
-  const hash = await generateSHA256(recordStr);
+  try {
+    const recordStr = document.getElementById('caseJson').textContent;
+    const hash = await generateSHA256(recordStr);
   
   consoleEl.innerHTML = '';
   const appendLine = (text, delay) => new Promise(r => setTimeout(() => {
