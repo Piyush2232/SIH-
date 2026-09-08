@@ -859,7 +859,49 @@ function updateMiniGauge() {
   document.getElementById('riskDockTag').style.color = band.color;
 }
 
+
+function runEntityResolution() {
+  try {
+    const rawHistory = localStorage.getItem('SENTRY_SCAN_HISTORY');
+    const history = rawHistory ? JSON.parse(rawHistory) : [];
+    const f = state.fields;
+    
+    // Check if we already added these rules to prevent duplicates
+    const hasBiometricRule = state.validation.rules.some(r => r.title.includes('Ghost Face'));
+    const hasDeviceRule = state.validation.rules.some(r => r.title.includes('Device Graph Anomaly'));
+
+    // B. Biometric Cross-Matching (Same Face, Different Name)
+    if (state.face.selfieDescriptor && history.length > 0 && !hasBiometricRule) {
+      const currentDesc = Object.values(state.face.selfieDescriptor);
+      for (const h of history) {
+        if (h.faceVector && h.name && f.name && h.name.toLowerCase() !== f.name.toLowerCase()) {
+          let distance = 0;
+          for (let i=0; i<128; i++) distance += Math.pow(currentDesc[i] - h.faceVector[i], 2);
+          distance = Math.sqrt(distance);
+          if (distance < 0.45) { // Threshold for same face
+            state.validation.score += 60;
+            state.validation.rules.push({ status: 'high', title: 'Biometric 1-to-N Match (Ghost Face)', detail: `Face vector maps to prior identity node: ${h.name}` });
+            break;
+          }
+        }
+      }
+    }
+
+    // C. Device Fingerprinting (Fraud Ring Coordination)
+    if (!hasDeviceRule) {
+      const currentDevice = generateDeviceFingerprint();
+      const recentDeviceScans = history.filter(h => h.device === currentDevice && h.timestamp > (Date.now() - 86400000));
+      const uniqueNamesOnDevice = new Set(recentDeviceScans.map(h => h.name?.toLowerCase()).filter(n=>n));
+      if (uniqueNamesOnDevice.size >= 2 && !uniqueNamesOnDevice.has(f.name?.toLowerCase())) {
+          state.validation.score += 30;
+          state.validation.rules.push({ status: 'mid', title: 'Device Graph Anomaly (Velocity)', detail: `${uniqueNamesOnDevice.size} distinct identities processed on this hardware node.` });
+      }
+    }
+  } catch (e) { console.error('Graph check error', e); }
+}
+
 function renderReport() {
+  runEntityResolution();
   const { composite, v, t, f } = computeComposite();
   setGauge('riskArcLarge', 'riskGaugeValueLarge', 'riskGaugeTag', composite, 267);
   updateMiniGauge();
