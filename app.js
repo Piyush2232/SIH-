@@ -847,15 +847,16 @@ function wireReport() {
 function computeComposite() {
   const v = state.validation.score || 0;
   const t = state.tamper.score || 0;
-  // If face verification is skipped, base risk floor is 50 (Manual Review)
-  const fScore = state.face.score != null ? state.face.score : 50; 
+  
+  // If face verification is skipped, we now explicitly FAIL them (100) instead of Manual Review
+  const fScore = state.face.score != null ? state.face.score : 100; 
 
   // 1. Highest Watermark System
   let composite = Math.max(v, t, fScore);
 
   // 2. Critical Overrides (Auto-Reject)
   const hasCriticalValidation = state.validation.rules.some(r => r.status === 'fail');
-  const faceFailed = state.face.verdict === 'NO MATCH';
+  const faceFailed = state.face.verdict === 'NO MATCH' || state.face.score == null;
   
   if (hasCriticalValidation || faceFailed) {
     composite = 100; // Force maximum risk
