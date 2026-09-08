@@ -617,13 +617,8 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
 }
 
 @keyframes wireframeEnter {
+  from { opacity: 0; transform: rotate(2deg) translateY(-8px); }
   to { opacity: 1; transform: rotate(2deg) translateY(-20px); }
-}
-  40% { transform: rotate(2deg) translateY(10px); opacity: 1; } /* Hit ground hard */
-  65% { transform: rotate(6deg) translateY(-80px); } /* Bounce up */
-  82% { transform: rotate(2deg) translateY(5px); } /* Hit ground */
-  93% { transform: rotate(3deg) translateY(-20px); } /* Small bounce */
-  100% { transform: rotate(2deg) translateY(-20px); opacity: 1; } /* Final rest */
 }
 
 @media (max-width: 900px) {
