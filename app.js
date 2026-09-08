@@ -648,8 +648,23 @@ function runTamperAnalysis() {
     const anomalyScore = Math.min(100, Math.round((std * 6) + (mean * 3)));
     const localized = max > mean * 5 && mean > 1.2;
 
-    state.tamper.elaScore = anomalyScore;
-    document.getElementById('elaScore').textContent = anomalyScore + ' / 100';
+          state.tamper.elaScore = anomalyScore;
+      
+      let verdict = 'UNTAMPERED';
+      let verdictColor = 'var(--low)';
+      if (anomalyScore > 55 || localized) {
+        verdict = 'HIGHLY TAMPERED';
+        verdictColor = 'var(--high)';
+      } else if (anomalyScore > 28) {
+        verdict = 'SLIGHTLY TAMPERED';
+        verdictColor = 'var(--mid)';
+      }
+      
+      const verdictEl = document.getElementById('tamperVerdict');
+      if (verdictEl) {
+        verdictEl.textContent = verdict;
+        verdictEl.style.color = verdictColor;
+      }
 
     const flags = [];
     if (anomalyScore > 55) flags.push({ level: 'high', text: 'High overall ELA variance — compression inconsistency across the image. Possible composite/edited image.' });
