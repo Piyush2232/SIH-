@@ -845,7 +845,6 @@ async function detectAndDraw(img, canvas, which) {
         ctx.fillStyle = '#FFFFFF';
         ctx.font = '14px monospace';
         ctx.fillText('NO FACE DETECTED', 10, canvas.height / 2);
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
   } catch (err) {
     console.error('Face detection error', err);
