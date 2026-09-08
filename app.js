@@ -18,7 +18,8 @@ const state = {
   validation: { rules: [], score: null },
   tamper: { elaScore: 0, metaFlags: [], score: null },
   face: { docDescriptor: null, selfieDescriptor: null, distance: null, verdict: null, score: null },
-  faceModelsLoaded: false
+  faceModelsLoaded: false,
+    isDocValid: false
 };
 
 /* ---------------------------------------------------------------------
@@ -121,7 +122,7 @@ function wireStepper() {
   document.querySelectorAll('.step').forEach(stepEl => {
     stepEl.addEventListener('click', () => {
       const n = parseInt(stepEl.getAttribute('data-step'), 10);
-      if (n === 1 || state.ocrText) goToStep(n); // only allow jump-ahead once OCR has run
+      if (n === 1 || state.isDocValid) goToStep(n); // only allow jump-ahead if a valid document was scanned
     });
   });
 }
@@ -221,12 +222,18 @@ function processOcrText() {
   document.getElementById('ocrOutput').hidden = false;
 
   if (isLikelyNotDocument) {
+    state.isDocValid = false;
     rawTextEl.textContent = "\n[!] INVALID DOCUMENT DETECTED\n\nThe AI could not detect any identity fields or readable text.\nPlease upload a clear, well-lit image of a valid Passport or ID document.\n\nRaw Output:\n" + (text.trim() || '(none)');
-    rawTextEl.style.color = 'var(--high)'; // red warning
+    rawTextEl.style.color = 'var(--high)';
     document.getElementById('fieldList').innerHTML = '<li class="fail">Document validation blocked. Please try another image.</li>';
     document.getElementById('toStep2').disabled = true;
     markStepStatus(1, false);
+    
+    // Poison the validation state so bypassing guarantees Critical Risk
+    state.validation.rules = [{ status: 'fail', title: 'Invalid Document', detail: 'The uploaded image contains no recognizable identity data.' }];
+    state.validation.score = 100;
   } else {
+    state.isDocValid = true;
     renderFieldTable(state.fields);
     document.getElementById('toStep2').disabled = false;
     markStepStatus(1, true);
