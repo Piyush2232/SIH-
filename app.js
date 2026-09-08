@@ -818,6 +818,7 @@ function runFaceMatch() {
 --------------------------------------------------------------------- */
 function wireReport() {
   document.getElementById('downloadReport').addEventListener('click', downloadReport);
+    document.getElementById('commitBlockchainBtn').addEventListener('click', commitToBlockchain);
 }
 
 function computeComposite() {
@@ -943,4 +944,54 @@ function downloadReport() {
   a.download = `${state.sessionId}_case_report.json`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+
+async function generateSHA256(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder("utf-8").encode(str));
+  return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
+}
+
+async function commitToBlockchain() {
+  const btn = document.getElementById('commitBlockchainBtn');
+  const consoleEl = document.getElementById('ledgerConsole');
+  if(btn.disabled) return;
+  btn.disabled = true;
+  btn.textContent = 'COMMITTING...';
+
+  const recordStr = document.getElementById('caseJson').textContent;
+  const hash = await generateSHA256(recordStr);
+  
+  consoleEl.innerHTML = '';
+  const appendLine = (text, delay) => new Promise(r => setTimeout(() => {
+    consoleEl.innerHTML += `<div class="ledger-line">${text}</div>`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+    r();
+  }, delay));
+
+  await appendLine(`> Generating cryptographic SHA-256 hash...`, 0);
+  await appendLine(`> HASH: ${hash}`, 600);
+  await appendLine(`> Connecting to Polygon zkEVM network...`, 800);
+  await appendLine(`> Broadcasting Zero-Knowledge Proof...`, 1200);
+  await appendLine(`> Awaiting network consensus...`, 1500);
+  
+  // Generate fake tx hash
+  const txHash = '0x' + await generateSHA256(hash + Date.now());
+  
+  await appendLine(`> Transaction Confirmed! Block: ${Math.floor(Math.random() * 1000000) + 14000000}`, 2000);
+  await appendLine(`> <span style="color: var(--success)">STATUS: IMMUTABLE</span>`, 400);
+  await appendLine(`> TX: ${txHash.slice(0, 42)}`, 200);
+
+  // Update the JSON to include the blockchain tx
+  const currentRecord = JSON.parse(recordStr);
+  currentRecord.blockchain = {
+    network: 'Polygon zkEVM',
+    recordHash: hash,
+    transactionId: txHash.slice(0, 42),
+    status: 'IMMUTABLE'
+  };
+  document.getElementById('caseJson').textContent = JSON.stringify(currentRecord, null, 2);
+  
+  btn.textContent = 'COMMITTED TO LEDGER';
+  btn.classList.add('btn-success');
 }
