@@ -386,7 +386,25 @@ function extractFieldsByKeyword(text, docType) {
   if (docType === 'permit') {
     return { ...common, permitNumber: grab(['permit no', 'permit number']) };
   }
-  return { ...common, idNumber: grab(['id no', 'identity no', 'national id']) };
+    // Generic Regex fallbacks for unlabelled fields (Aadhaar / National ID)
+  if (!common.dateOfBirth) {
+    const dobMatch = text.match(/\b(\d{2}[/\-]\d{2}[/\-]\d{4})\b/);
+    if (dobMatch) common.dateOfBirth = dobMatch[1];
+  }
+
+  let idNumber = grab(['id no', 'identity no', 'national id']);
+  if (!idNumber && docType === 'national_id') {
+    // Look for Aadhaar format: 1234 5678 9012
+    const aadhaarMatch = text.match(/\b(\d{4}\s\d{4}\s\d{4})\b/);
+    if (aadhaarMatch) idNumber = aadhaarMatch[1];
+  }
+  
+  if (idNumber && !common.name) {
+    common.name = "Unlabelled Identity (Aadhaar)";
+  }
+
+  return { ...common, idNumber };
+
 }
 
 /* ---------------------------------------------------------------------
