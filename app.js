@@ -15,9 +15,9 @@ const state = {
   ocrText: '',
   mrzLines: [],
   fields: {},             // extracted fields
-  validation: { rules: [], score: 0 },
-  tamper: { elaScore: 0, metaFlags: [], score: 0 },
-  face: { docDescriptor: null, selfieDescriptor: null, distance: null, verdict: null, score: 0 },
+  validation: { rules: [], score: null },
+  tamper: { elaScore: 0, metaFlags: [], score: null },
+  face: { docDescriptor: null, selfieDescriptor: null, distance: null, verdict: null, score: null },
   faceModelsLoaded: false
 };
 
@@ -75,6 +75,11 @@ function startNewCase() {
    STEPPER NAVIGATION
 --------------------------------------------------------------------- */
 function goToStep(n) {
+  if (n === 2) renderValidation();
+  if (n === 3) runTamperAnalysis();
+  if (n === 4) prepDocFace();
+  if (n === 5) renderReport();
+
   for (let i = 1; i <= 5; i++) {
     document.getElementById('panel-' + i).classList.toggle('hidden', i !== n);
     const stepEl = document.querySelector('.step[data-step="' + i + '"]');
@@ -143,6 +148,8 @@ function wireUpload() {
     reader.onload = (e) => {
       preview.src = e.target.result;
       preview.hidden = false;
+    const docPrompt = document.getElementById('docPrompt');
+    if(docPrompt) docPrompt.hidden = true;
       const img = new Image();
       img.onload = () => { state.docImage = img; };
       img.src = e.target.result;
@@ -220,7 +227,7 @@ function renderFieldTable(fields) {
   }
   entries.forEach(([k, v]) => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${labelize(k)}</td><td>${v || '<span class="muted">—</span>'}</td>`;
+    tr.innerHTML = `<td>${labelize(k)}</td><td>${(v+"").replace(/</g, "&lt;") || '<span class="muted">—</span>'}</td>`;
     table.appendChild(tr);
   });
 }
@@ -261,14 +268,13 @@ function mrzChecksum(str) {
   for (let i = 0; i < str.length; i++) sum += mrzCharValue(str[i]) * weights[i % 3];
   return sum % 10;
 }
-function mrzDateToIso(yymmdd) {
+function mrzDateToIso(yymmdd, isExpiry = false) {
   const clean = sanitizeMrzDigits(yymmdd);
   if (!/^\d{6}$/.test(clean)) return null;
   const yy = parseInt(clean.slice(0, 2), 10);
   const mm = clean.slice(2, 4);
   const dd = clean.slice(4, 6);
-  // Heuristic century pivot: >30 => 1900s (birth dates), else 2000s.
-  const yyyy = yy > 30 ? 1900 + yy : 2000 + yy;
+  const yyyy = isExpiry ? 2000 + yy : (yy > 30 ? 1900 + yy : 2000 + yy);
   return `${yyyy}-${mm}-${dd}`;
 }
 
@@ -284,7 +290,7 @@ function parseMrz(lines) {
 
   // Auto-correct common OCR digit confusion in numeric zones
   const passportNoRaw = l2.slice(0, 9);
-  const passportNoClean = sanitizeMrzDigits(passportNoRaw);
+  const passportNoClean = passportNoRaw.replace(/</g, "").trim();
   const passportNoCheck = sanitizeMrzDigits(l2[9]);
   fields.passportNumber = passportNoClean.replace(/</g, '');
   fields.nationality = l2.slice(10, 13).replace(/</g, '');
@@ -377,8 +383,8 @@ function renderValidation() {
     row.innerHTML = `
       <span class="rule-icon ${r.status}">${icon}</span>
       <div class="rule-copy">
-        <span class="rule-title">${r.title}</span>
-        <span class="rule-detail">${r.detail}</span>
+        <span class="rule-title">${(r.title+"").replace(/</g, "&lt;")}</span>
+        <span class="rule-detail">${(r.detail+"").replace(/</g, "&lt;")}</span>
       </div>`;
     list.appendChild(row);
   });
@@ -626,16 +632,15 @@ function runTamperAnalysis() {
 function readMetadata(file) {
   return new Promise((resolve) => {
     if (!file) return resolve({ suspicious: false, matches: [] });
+    const slice = file.slice(0, 131072);
     const reader = new FileReader();
     reader.onload = (e) => {
-      const bytes = new Uint8Array(e.target.result);
-      let str = '';
-      for (let i = 0; i < bytes.length; i++) str += String.fromCharCode(bytes[i]);
+      const str = new TextDecoder('latin1').decode(e.target.result);
       const signatures = ['Adobe', 'Photoshop', 'GIMP', 'Paint.NET', 'Snapseed', 'PicsArt', 'Canva', 'Pixlr'];
       const matches = signatures.filter(sig => str.includes(sig));
       resolve({ suspicious: matches.length > 0, matches });
     };
-    reader.readAsArrayBuffer(file);
+    reader.readAsArrayBuffer(slice);
   });
 }
 
@@ -643,6 +648,12 @@ function readMetadata(file) {
    STEP 4 — FACE VERIFICATION (face-api.js, fully on-device)
 --------------------------------------------------------------------- */
 let cameraStream = null;
+function stopCameraStream() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(t => t.stop());
+    cameraStream = null;
+  }
+}
 
 async function loadFaceModels() {
   const statusEl = document.getElementById('faceModelStatus');

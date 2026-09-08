@@ -15,6 +15,11 @@
   --success: #4A9E5C;            /* Clean / Pass */
   --warning: #D4A843;            /* Pending / Moderate */
   --error: #D71921;              /* Fail */
+
+  --low: var(--success);
+  --mid: var(--warning);
+  --high: var(--error);
+
   
   /* Fonts */
   --font-display: 'Doto', monospace;
@@ -164,7 +169,9 @@ html, body {
 }
 
 .id-wireframe {
-  animation: appleFall 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: wireframeEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   width: 400px;
   height: 260px;
@@ -387,7 +394,9 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
     font-size: 60px;
   }
   .id-wireframe {
-  animation: appleFall 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: wireframeEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
     transform: none;
     width: 320px;
@@ -607,8 +616,9 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
 }
 }
 
-@keyframes appleFall {
-  0% { transform: rotate(-10deg) translateY(-120vh); opacity: 0; }
+@keyframes wireframeEnter {
+  to { opacity: 1; transform: rotate(2deg) translateY(-20px); }
+}
   40% { transform: rotate(2deg) translateY(10px); opacity: 1; } /* Hit ground hard */
   65% { transform: rotate(6deg) translateY(-80px); } /* Bounce up */
   82% { transform: rotate(2deg) translateY(5px); } /* Hit ground */
@@ -620,3 +630,5 @@ canvas { max-width: 100%; border: 1px solid var(--border-visible); background: v
   .scroll-title-small { font-size: 60px !important; }
   .scroll-desc-long p { font-size: 16px !important; }
 }
+
+#toStep2 { margin-left: auto; }
