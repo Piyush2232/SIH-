@@ -193,7 +193,9 @@ async function runOcr() {
 
 function processOcrText() {
   const text = state.ocrText;
-  document.getElementById('rawText').textContent = text.trim() || '(no text recognised)';
+  const rawTextEl = document.getElementById('rawText');
+  rawTextEl.textContent = text.trim() || '(no text recognised)';
+  rawTextEl.style.color = ''; // reset color
 
   // Attempt MRZ detection (passport / MRZ-bearing docs)
   const mrz = extractMrzLines(text);
@@ -211,10 +213,24 @@ function processOcrText() {
     state.fields = extractFieldsByKeyword(text, state.docType);
   }
 
-  renderFieldTable(state.fields);
+  const validFieldsFound = Object.values(state.fields).filter(v => v && String(v).trim().length > 0).length;
+  
+  // HEURISTIC: Not a document if almost no text OR no fields extracted
+  const isLikelyNotDocument = text.replace(/\s/g, '').length < 30 || validFieldsFound === 0;
+
   document.getElementById('ocrOutput').hidden = false;
-  document.getElementById('toStep2').disabled = false;
-  markStepStatus(1, Object.keys(state.fields).length > 0);
+
+  if (isLikelyNotDocument) {
+    rawTextEl.textContent = "\n[!] INVALID DOCUMENT DETECTED\n\nThe AI could not detect any identity fields or readable text.\nPlease upload a clear, well-lit image of a valid Passport or ID document.\n\nRaw Output:\n" + (text.trim() || '(none)');
+    rawTextEl.style.color = 'var(--high)'; // red warning
+    document.getElementById('fieldList').innerHTML = '<li class="fail">Document validation blocked. Please try another image.</li>';
+    document.getElementById('toStep2').disabled = true;
+    markStepStatus(1, false);
+  } else {
+    renderFieldTable(state.fields);
+    document.getElementById('toStep2').disabled = false;
+    markStepStatus(1, true);
+  }
 }
 
 function renderFieldTable(fields) {
@@ -399,7 +415,7 @@ const MOCK_WATCHLIST_DATABASE = [
 
 function checkDatabaseRules(f) {
   const dbRules = [];
-  const pNum = (f.passportNumber || f.idNumber || f.licenseNumber || '').trim().toUpperCase();
+  const pNum = (f.passportNumber || f.idNumber || f.licenseNumber || f.visaNumber || f.permitNumber || '').trim().toUpperCase();
 
   // 1. Blacklist / Watchlist Lookup
   const blacklisted = MOCK_WATCHLIST_DATABASE.find(b => b.passportNumber === pNum);
@@ -424,7 +440,7 @@ function checkDatabaseRules(f) {
 
     if (pNum && history.length > 0) {
       const matchDifferentName = history.find(h => 
-        h.passportNumber === pNum && h.name && f.name && h.name.toLowerCase() !== f.name.toLowerCase()
+        h.documentNumber === pNum && h.name && f.name && h.name.toLowerCase() !== f.name.toLowerCase()
       );
       if (matchDifferentName) {
         dbRules.push({
@@ -881,6 +897,20 @@ function runEntityResolution() {
     // Check if we already added these rules to prevent duplicates
     const hasBiometricRule = state.validation.rules.some(r => r.title.includes('Ghost Face'));
     const hasDeviceRule = state.validation.rules.some(r => r.title.includes('Device Graph Anomaly'));
+
+    
+    const docNumRaw = f.passportNumber || f.idNumber || f.licenseNumber || f.visaNumber || f.permitNumber;
+    const pNum = (docNumRaw || '').trim().toUpperCase();
+    const hasIdSwapRule = state.validation.rules.some(r => r.title.includes('Synthetic Identity (ID Swap)'));
+    
+    // A. ID Swap (Same ID, Different Name)
+    if (pNum && history.length > 0 && !hasIdSwapRule) {
+      const idSwap = history.find(h => h.documentNumber === pNum && h.name && f.name && h.name.toLowerCase() !== f.name.toLowerCase());
+      if (idSwap) {
+        state.validation.score = Math.min(100, state.validation.score + 50);
+        state.validation.rules.push({ status: 'fail', title: 'Synthetic Identity (ID Swap)', detail: `ID Number linked to previous node: ${idSwap.name}` });
+      }
+    }
 
     // B. Biometric Cross-Matching (Same Face, Different Name)
     if (state.face.selfieDescriptor && history.length > 0 && !hasBiometricRule) {
